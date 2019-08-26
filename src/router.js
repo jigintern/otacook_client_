@@ -2,6 +2,8 @@ import Vue from 'vue'
 import Router from 'vue-router'
 import Questionpage from './views/Questionpage.vue'
 import Home from './views/Home.vue'
+import Signin from './views/Signin.vue'
+import Signup from './views/Signup.vue'
 import app from './App.vue'
 
 Vue.use(Router)
@@ -10,13 +12,28 @@ export default new Router({
   routes: [
     {
       path: '/',
-      name: 'Questionpage',
-      component: Questionpage
+      name: 'Home',
+      component: Home
+    },
+    {
+      path: '/signin',
+      name: 'Signin',
+      component: Signin
+    },
+    {
+      path: '/signup',
+      name: 'Signup',
+      component: Signup
     },
     {
       path: '/home',
       name: 'Home',
       component: Home
-    }
+    },
+    {
+      path: '/questionpage',
+      name: 'Questionpage',
+      component: Questionpage
+    },
   ]
 })
