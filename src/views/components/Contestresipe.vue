@@ -1,26 +1,23 @@
-<template>
-<v-app>
-        <v-card width='800' class="mx-auto mt-5" outlined>
-            <v-container class="justify-center">
-                <v-list>
-                    <div class="display-1 text-center">
-                        レシピ
-                    </div>
-                    <v-divider/>
-                    <v-content>
-                        <Resipe/>
-                    </v-content>
-                </v-list>
-            </v-container>
-        </v-card>
-</v-app>
+<template lang="pug">
+div
+    v-card
+        v-card-title.headline レシピ
+        ol.ma-4.ml-6
+            li.body-1(v-for="line in list") {{ line.message }}
+
+        div.mb-4
 </template>
 
 <script>
-import Resipe from './Resipe'
 export default {
-    components: {
-        Resipe
+    data: function(){
+        return{
+            list: [
+                { message: '肉を焼く' },
+                { message: '野菜を炒める' },
+                { message: '魚を焼く' }
+            ]
+        }
     }
 }
 </script>
