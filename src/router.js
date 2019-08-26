@@ -4,6 +4,7 @@ import Questionpage from './views/Questionpage.vue'
 import Home from './views/Home.vue'
 import Signin from './views/Signin.vue'
 import Signup from './views/Signup.vue'
+import Mypage from './views/Mypage.vue'
 import app from './App.vue'
 
 Vue.use(Router)
@@ -26,9 +27,9 @@ export default new Router({
       component: Signup
     },
     {
-      path: '/home',
-      name: 'Home',
-      component: Home
+      path: '/mypage',
+      name: 'Mypgae',
+      component: Mypage
     },
     {
       path: '/questionpage',

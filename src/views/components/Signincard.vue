@@ -22,7 +22,7 @@
     <v-layout justify-space-around="">
         <v-layout class="tosignup">
             <div class="moji ml-4">会員登録をされていない方</div>
-            <v-btn class="ma-4" @click="tosignup">サインアップ</v-btn>
+            <v-btn class="ma-4" @click="tosignup">サインアップページへ</v-btn>
         </v-layout>
         <v-btn class="ma-4" @click="submit">ログイン</v-btn>
     </v-layout>
