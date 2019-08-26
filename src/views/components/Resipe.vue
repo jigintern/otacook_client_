@@ -6,15 +6,21 @@ div
                 th.text-center 材料
                 th.text-center 分量
         tbody
-            tr
-                td.text-center 玉ねぎ
-                td.text-center 一本
-            tr
-                td.text-center りんご
-                td.text-center 一枚
+            tr(v-for="item in items" :key="item.name")
+                td.text-center {{item.name}}
+                td.text-center {{item.amount}}
     </v-simple-table>
 </template>
 
-<style>
-
-</style>
+<script>
+export default {
+    data:function(){
+        items: [
+            {
+                name:'玉ねぎ',
+                amount:'一本'
+            }
+        ]
+    }
+}
+</script>
