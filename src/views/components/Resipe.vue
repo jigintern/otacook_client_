@@ -1,6 +1,6 @@
 <template lang='pug'>
-div 
-    <v-simple-table dense>
+div
+    v-simple-table
         thead
             tr
                 th.text-center 材料
@@ -9,7 +9,6 @@ div
             tr(v-for="item in items" :key="item.name")
                 td.text-center {{item.name}}
                 td.text-center {{item.amount}}
-    </v-simple-table>
 </template>
 
 <script>
