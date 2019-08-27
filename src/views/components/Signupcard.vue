@@ -3,18 +3,25 @@
 <form>
     <v-text-field
         class="mx-4"
+        :rules="[rules.required]"
         label="ユーザー名"
         required
     ></v-text-field>
     <v-text-field
         class="mx-4"
+        :rules="[rules.required]"
         label="メールアドレス"
         required
     ></v-text-field>
     <v-text-field
         class="mx-4"
+        v-model="password"
+        :rules="[rules.required, rules.min]"
+        :type="passwordarea ? 'text' : 'password'"
         label="パスワード"
+        hint="八文字以上でオナシャス"
         required
+        @click:append="passwordarea = !passwordarea"
     ></v-text-field>
     <v-checkbox
         class="mx-4"
@@ -41,8 +48,17 @@ export default {
         submit: function(){
             this.$router.push("/")
         }
-    }
+    },
+    data () {
+        return {
+            rules: {
+                required: value => !!value || '入力必須',
+                min: v => v.length >= 8 || '八文字以上でオナシャス',
+            },
+        }
+    },
 }
+
 </script>
 
 <style scoped>

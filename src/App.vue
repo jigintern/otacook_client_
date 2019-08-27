@@ -16,7 +16,7 @@
     </v-app-bar>-->
       <Headercontent/>
 
-    <v-content>
+    <v-content >
       <router-view/>
     </v-content>
     <Footer/>

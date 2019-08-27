@@ -1,6 +1,6 @@
 <template lang="pug">
 div
-    v-toolbar
+    v-toolbar(color="#ffb618")
         v-toolbar-title オタクック
         .flex-grow-1
         v-toolbar-items

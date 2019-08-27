@@ -1,11 +1,9 @@
 <template lang="pug">
 div
     v-card
-        v-card-title.headline レシピ
-        ol.ma-4.ml-6
+        v-card-title.headline.text-weight-light.text-weight-italic 材料
+        ul.ml-6.pb-4
             li.body-1(v-for="line in list") {{ line.message }}
-
-        div.mb-4
 </template>
 
 <script>
@@ -13,9 +11,9 @@ export default {
     data: function(){
         return{
             list: [
-                { message: '肉を焼く' },
-                { message: '野菜を炒める' },
-                { message: '魚を焼く' }
+                { message: 'お肉' },
+                { message: '野菜' },
+                { message: '魚' }
             ]
         }
     }
