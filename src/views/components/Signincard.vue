@@ -3,21 +3,18 @@
 <form>
     <v-text-field
         v-model="email"
-        :error-messages="emailErrors"
+        :rules="[rules.required]"
         class="mx-4"
         label="メールアドレス"
         required
-        @input="$v.email.$touch()"
-        @blur="$v.email.$touch()"
     ></v-text-field>
     <v-text-field
         v-model="passward"
-        :error-messages="selectErrors"
+        :rules="[rules.required]"
         class="mx-4"
         label="パスワード"
+        hint="八文字以上の文字列です."
         required
-        @input="$v.passward.$touch()"
-        @blur="$v.passward.$touch()"
     ></v-text-field>
     <v-layout justify-space-around="">
         <v-layout class="tosignup">
@@ -39,7 +36,14 @@ export default {
         submit: function(){
             this.$router.push("/")
         }
-    }
+    },
+    data () {
+        return {
+            rules: {
+                required: value => !!value || '入力必須',
+            },
+        }
+    },
 }
 </script>
 
