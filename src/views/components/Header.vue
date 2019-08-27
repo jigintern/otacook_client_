@@ -2,8 +2,12 @@
 div
     v-toolbar(color="#ffb618")
         v-toolbar-title オタクック
+        v-divider.mx-4(vertical)
         .flex-grow-1
+        v-text-field(single-line hide-details)
+            v-icon mdi-anchor
         v-toolbar-items
+            v-divider.mx-4(vertical)
             div(v-if="isLoggingin" class="my-auto")
                 v-btn(text @click="tomypage") MyPage
                 v-btn(text @click="tosignout") SignOut
@@ -30,6 +34,6 @@ export default {
         return{
             isLoggingin: false
         }
-    }
+    },
 }
 </script>

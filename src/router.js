@@ -1,10 +1,13 @@
 import Vue from 'vue'
 import Router from 'vue-router'
-import Questionpage from './views/Questionpage.vue'
+import Questionpage from './views/contest/Questionpage.vue'
+import Answerpage from './views/contest/Answerpage.vue'
+import Rankingpage from './views/contest/Rankingpage.vue'
+import Votepage from './views/contest/Votepage.vue'
 import Home from './views/Home.vue'
-import Signin from './views/Signin.vue'
-import Signup from './views/Signup.vue'
-import Mypage from './views/Mypage.vue'
+import Signin from './views/user/Signin.vue'
+import Signup from './views/user/Signup.vue'
+import Mypage from './views/user/Mypage.vue'
 import app from './App.vue'
 
 Vue.use(Router)
@@ -35,6 +38,21 @@ export default new Router({
       path: '/questionpage',
       name: 'Questionpage',
       component: Questionpage
+    },
+    {
+      path: '/answerpage',
+      name: 'Answerpage',
+      component: Answerpage
+    },
+    {
+      path: '/votepage',
+      name: 'Voterpage',
+      component: Votepage
+    },
+    {
+      path: '/rankingpage',
+      name: 'Rankingpage',
+      component: Rankingpage
     },
   ]
 })

@@ -8,7 +8,7 @@ v-container
 </template>
 
 <script>
-import Signupcard from './components/Signupcard'
+import Signupcard from '..//components/Signupcard'
 
 export default{
     components: {
