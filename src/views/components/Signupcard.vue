@@ -16,6 +16,14 @@
         label="パスワード"
         required
     ></v-text-field>
+    <!--<v-text-field
+            v-model="password"
+            :append-icon="show1 ? 'visibility' : 'visibility_off'"
+            :rules="[rules.required, rules.min]"
+            :type="show1 ? 'text' : 'password'"
+            counter
+            @click:append="show1 = !show1"
+    ></v-text-field>-->
     <v-checkbox
         class="mx-4"
         label="利用規約に同意する。"

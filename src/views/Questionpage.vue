@@ -1,14 +1,21 @@
 <template lang="pug">
-v-conteiner
-  v-card(class="ma-4")
-    //料理の名前を入れる##
-    div.headline.ml-2.mb-1 {{ time }}
-    div.display-1.ml-4.font-weight-bold お題: {{ resipetitle }}
-    div.body-2.mr-2.text-right {{ total_member }}人が参加しています
-    
-    //コンテストレシピを表示するコンポーネント
-    #ContestResipeArea
-      Contestresipe(class="ma-4")
+div(color="#F7F3E8")
+  v-container
+    v-card(class="ma-4")
+      //料理の名前を入れる##
+      div.headline.ml-2.mb-1 {{ time }}
+      div.display-1.ml-4.font-weight-bold お題: {{ resipetitle }}
+      div.body-2.mr-2.text-right {{ total_member }}人が参加しています
+      
+      //コンテスト材料を表示するコンポーネント
+      #MatelialsArea
+        Materials(class="ma-10 my-4 pb-4")
+      //コンテストレシピを表示するコンポーネント
+      #ResipeArea
+        Resipe(class="ma-10 my-4 pb-10")
+
+      .text-center.pt-10.pb-12
+        v-btn.title(color="#FFB618") コンテストに提出する
 
         //サーバーで生成したHTML埋め込み
         //iframe(
@@ -20,11 +27,13 @@ v-conteiner
 </template>
 
 <script>
-import Contestresipe from './components/Contestresipe'
+import Resipe from './components/Resipe'
+import Materials from './components/Materials'
 
 export default{
   components: {
-    Contestresipe
+    Resipe,
+    Materials
   },
   data: function(){
     return{

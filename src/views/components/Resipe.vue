@@ -1,25 +1,24 @@
-<template lang='pug'>
+<template lang="pug">
 div
-    v-simple-table
-        thead
-            tr
-                th.text-center 材料
-                th.text-center 分量
-        tbody
-            tr(v-for="item in items" :key="item.name")
-                td.text-center {{item.name}}
-                td.text-center {{item.amount}}
+    v-card
+        v-card-title.headline.text-weight-light.text-weight-italic レシピ
+        ol.ml-6.pb-4
+            li.body-1(v-for="line in list") {{ line.message }}
 </template>
 
 <script>
 export default {
-    data:function(){
-        items: [
-            {
-                name:'玉ねぎ',
-                amount:'一本'
-            }
-        ]
+    data: function(){
+        return{
+            list: [
+                { message: '肉を焼く' },
+                { message: '野菜を炒める' },
+                { message: '魚を焼く' }
+            ]
+        }
     }
 }
 </script>
+
+<style>
+</style>
