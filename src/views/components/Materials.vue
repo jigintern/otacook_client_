@@ -8,14 +8,8 @@ div
 
 <script>
 export default {
-    data: function(){
-        return{
-            list: [
-                { message: 'お肉' },
-                { message: '野菜' },
-                { message: '魚' }
-            ]
-        }
+    props:{
+        list: Array
     }
 }
 </script>
