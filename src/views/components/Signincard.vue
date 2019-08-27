@@ -2,14 +2,12 @@
 <v-card>
 <form>
     <v-text-field
-        v-model="email"
         :rules="[rules.required]"
         class="mx-4"
         label="メールアドレス"
         required
     ></v-text-field>
     <v-text-field
-        v-model="passward"
         :rules="[rules.required]"
         class="mx-4"
         label="パスワード"
