@@ -15,9 +15,8 @@
       </v-btn>
     </v-app-bar>-->
       <Headercontent/>
-
-    <v-content >
-      <router-view/>
+    <v-content class="master">
+        <router-view/>
     </v-content>
     <Footer/>
   </v-app>
@@ -38,3 +37,9 @@ export default {
   }),
 };
 </script>
+
+<style scoped>
+.master{
+  background-color: #f7f3e8
+}
+</style>
