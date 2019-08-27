@@ -7,9 +7,9 @@
 </template>
 
 <script>
-import Usercard from './components/Usercard'
-import Skilltreecard from './components/Skilltreecard'
-import Ratecard from './components/Ratecard'
+import Usercard from '..//components/Usercard'
+import Skilltreecard from '..//components/Skilltreecard'
+import Ratecard from '..//components/Ratecard'
 
 export default {
     components: {

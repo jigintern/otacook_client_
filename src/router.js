@@ -1,10 +1,10 @@
 import Vue from 'vue'
 import Router from 'vue-router'
-import Questionpage from './views/Questionpage.vue'
+import Questionpage from './views/contest/Questionpage.vue'
 import Home from './views/Home.vue'
-import Signin from './views/Signin.vue'
-import Signup from './views/Signup.vue'
-import Mypage from './views/Mypage.vue'
+import Signin from './views/user/Signin.vue'
+import Signup from './views/user/Signup.vue'
+import Mypage from './views/user/Mypage.vue'
 import app from './App.vue'
 
 Vue.use(Router)
