@@ -1,24 +1,45 @@
 <template lang="pug">
+div(color="#F7F3E8")
   v-container
-      //v-layout
-      v-flex
-        //料理の名前を入れる##
-        div.display-1.mt-1 料理名: {{ resipetitle }}
-        //コンテストレシピを表示するコンポーネント
-        #ContestResipeArea
-          Contestresipe
+    v-card(class="ma-4")
+      //料理の名前を入れる##
+      div.headline.ml-2.mb-1 {{ time }}
+      div.display-1.ml-4.font-weight-bold お題: {{ resipetitle }}
+      div.body-2.mr-2.text-right {{ total_member }}人が参加しています
+      
+      //コンテスト材料を表示するコンポーネント
+      #MatelialsArea
+        Materials(class="ma-10 my-4 pb-4")
+      //コンテストレシピを表示するコンポーネント
+      #ResipeArea
+        Resipe(class="ma-10 my-4 pb-10")
+
+      .text-center.pt-10.pb-12
+        v-btn.title(color="#FFB618") コンテストに提出する
+
+        //サーバーで生成したHTML埋め込み
+        //iframe(
+          width="90%"
+          height="1000px"
+          crolling="no"
+          src="http://localhost:8080/#/"
+        //)
 </template>
 
 <script>
-import Contestresipe from './components/Contestresipe'
+import Resipe from './components/Resipe'
+import Materials from './components/Materials'
 
 export default{
   components: {
-    Contestresipe
+    Resipe,
+    Materials
   },
   data: function(){
     return{
-      resipetitle:'冷やしキムチラーメン'
+      time: "7:00 ~ 8:00",
+      resipetitle:'冷やしキムチラーメン',
+      total_member: 1
     }
   }
 }
