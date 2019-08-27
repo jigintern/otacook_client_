@@ -3,6 +3,7 @@ import Router from 'vue-router'
 import Questionpage from './views/contest/Questionpage.vue'
 import Answerpage from './views/contest/Answerpage.vue'
 import Rankingpage from './views/contest/Rankingpage.vue'
+import Votepage from './views/contest/Votepage.vue'
 import Home from './views/Home.vue'
 import Signin from './views/user/Signin.vue'
 import Signup from './views/user/Signup.vue'
@@ -42,6 +43,11 @@ export default new Router({
       path: '/answerpage',
       name: 'Answerpage',
       component: Answerpage
+    },
+    {
+      path: '/votepage',
+      name: 'Voterpage',
+      component: Votepage
     },
     {
       path: '/rankingpage',
