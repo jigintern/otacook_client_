@@ -18,14 +18,6 @@ div(color="#F7F3E8")
 
       .text-center.pt-10.pb-12
         v-btn.title(color="#FFB618" @click="toanswer") コンテストに提出する
-
-        //サーバーで生成したHTML埋め込み
-        //iframe(
-          width="90%"
-          height="1000px"
-          crolling="no"
-          src="http://localhost:8080/#/"
-        //)
 </template>
 
 <script>
@@ -46,10 +38,10 @@ export default{
   },
   methods: {
     tovote: function(){
-      this.$router.push("/vote")
+      this.$router.push("/votepage")
     },
     toanswer: function(){
-      this.$router.push("/answer")
+      this.$router.push("/answerpage")
     }
   }
 }
