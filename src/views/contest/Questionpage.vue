@@ -11,10 +11,16 @@ div(color="#F7F3E8")
       
       //コンテスト材料を表示するコンポーネント
       #MatelialsArea
-        Materials(class="ma-10 my-4 pb-4")
+        Materials(
+          class="ma-10 my-4 pb-4"
+          :list= "mateliallist"
+        )
       //コンテストレシピを表示するコンポーネント
       #ResipeArea
-        Resipe(class="ma-10 my-4 pb-10")
+        Resipe(
+          class="ma-10 my-4 pb-10"
+          :list="resipelist"
+        )
 
       .text-center.pt-10.pb-12
         v-btn.title(color="#FFB618" @click="toanswer") コンテストに提出する
@@ -33,7 +39,17 @@ export default{
     return{
       time: "7:00 ~ 8:00",
       resipetitle:'冷やしキムチラーメン',
-      total_member: 1
+      total_member: 1,
+      mateliallist: [
+        { message: 'お肉' },
+        { message: '野菜' },
+        { message: '魚' },
+      ],
+      resipelist: [
+        { message: '肉を焼く' },
+        { message: '野菜を炒める' },
+        { message: '魚を焼く' },
+      ]
     }
   },
   methods: {

@@ -34,6 +34,6 @@ export default {
         return{
             isLoggingin: false
         }
-    }
+    },
 }
 </script>

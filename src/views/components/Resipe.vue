@@ -8,14 +8,8 @@ div
 
 <script>
 export default {
-    data: function(){
-        return{
-            list: [
-                { message: '肉を焼く' },
-                { message: '野菜を炒める' },
-                { message: '魚を焼く' }
-            ]
-        }
+    props:{
+        list: Array
     }
 }
 </script>
