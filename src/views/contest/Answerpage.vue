@@ -8,8 +8,8 @@ div(color="#F7F3E8")
 
       div.headline.ma-8.mb-0 料理名
       v-text-field.ma-8.mt-0(
-        v-model="name"
         :counter="30"
+        value=""
         :rules="[rules.required, rules.namemax]"
         label="料理名を入力！"
         required)
@@ -17,6 +17,7 @@ div(color="#F7F3E8")
       div.headline.ma-8.mb-0 コメント
       v-textarea.ma-8.mt-0(
         :counter="140"
+        value=""
         :rules="[rules.required, rules.commentmax]"
         label="料理について自由に書いてください！")
         required
@@ -27,6 +28,7 @@ div(color="#F7F3E8")
         label="写真を選択してください！")
 
       .text-center.pt-10.pb-12
+        //div.text-color 投票済みです
         v-btn.title(color="#FFB618" @click="toquestion") 送信
 </template>
 
