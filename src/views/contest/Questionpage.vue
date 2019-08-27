@@ -29,8 +29,8 @@ div(color="#F7F3E8")
 </template>
 
 <script>
-import Resipe from './components/Resipe'
-import Materials from './components/Materials'
+import Resipe from '..//components/Resipe'
+import Materials from '..//components/Materials'
 
 export default{
   components: {
