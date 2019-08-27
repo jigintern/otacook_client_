@@ -17,6 +17,7 @@ div(color="#F7F3E8")
                     :img="line.img"
                     :icon="line.icon"
                     :comment="line.comment"
+                    :isnameshow="true"
                 )
             .text-center.pt-10.pb-12
                 v-btn.title(color="#FFB618" @click="totop") トップページへ
