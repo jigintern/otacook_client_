@@ -45,21 +45,24 @@ export default{
         Resipe,
         Materials
     },
+    props:{
+        resipeid: Number
+    },
     data: function(){
         return{
-        resipetitle:'冷やしキムチラーメン',
-        topimg: "https://imgfp.hotp.jp/IMGH/21/64/P028842164/P028842164_480.jpg",
-        mateliallist: [
-            { message: 'お肉' },
-            { message: '野菜' },
-            { message: '魚' },
-        ],
-        resipelist: [
-            { message: '肉を焼く' },
-            { message: '野菜を炒める' },
-            { message: '魚を焼く' },
-        ],
-        tags: ['天気の子', 'あは', 'あはは']
+            resipetitle:'冷やしキムチラーメン',
+            topimg: "https://imgfp.hotp.jp/IMGH/21/64/P028842164/P028842164_480.jpg",
+            mateliallist: [
+                { message: 'お肉' },
+                { message: '野菜' },
+                { message: '魚' },
+            ],
+            resipelist: [
+                { message: '肉を焼く' },
+                { message: '野菜を炒める' },
+                { message: '魚を焼く' },
+            ],
+            tags: ['天気の子', 'あは', 'あはは']
         }
     },
     methods: {

@@ -5,7 +5,7 @@ div(color="#F7F3E8")
       //料理の名前を入れる##
       div.headline.ml-2.mb-1 {{ time }}
       div.display-1.ml-4.font-weight-bold お題: {{ resipetitle }}
-      div.body-2.mr-2.text-right {{ total_member }}人が参加しています
+      div.body-2.mr-4.text-right {{ total_member }}人が参加しています
       .text-right.ma-4
         v-btn.title(color="#FFB618" @click="tovote") 投票ページへ
       

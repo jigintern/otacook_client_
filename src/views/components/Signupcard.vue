@@ -2,7 +2,7 @@
 <v-card>
 <form>
     <v-text-field
-        class="mx-4"
+        class="mx-4 pt-5"
         :rules="[rules.required]"
         label="ユーザー名"
         required
@@ -46,8 +46,15 @@ export default {
             this.$router.push("/signin")
         },
         submit: function(){
-            this.$router.push("/")
+            if(this.redirectto == null){
+                this.$router.push("/")
+            }else{
+                this.$router.push(this.redirectto)
+            }
         }
+    },
+    props:{
+        redirectto: String
     },
     data () {
         return {

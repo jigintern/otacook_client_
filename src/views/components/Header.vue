@@ -27,6 +27,7 @@ export default {
             this.$router.push("/signup")
         },
         tosignout: function(){
+            this.$emit('parentMethod')
             this.$router.push("/")
         },
         tomypage: function(){

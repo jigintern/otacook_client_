@@ -3,7 +3,7 @@
 <form>
     <v-text-field
         :rules="[rules.required]"
-        class="mx-4"
+        class="mx-4 pt-5"
         label="メールアドレス"
         required
     ></v-text-field>
@@ -32,8 +32,15 @@ export default {
             this.$router.push("/signup")
         },
         submit: function(){
-            this.$router.push("/")
+            if(this.redirectto == null){
+                this.$router.push("/")
+            }else{
+                this.$router.push(this.redirectto)
+            }
         }
+    },
+    props: {
+        redirectto: String
     },
     data () {
         return {
