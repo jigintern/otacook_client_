@@ -64,7 +64,6 @@ export default{
     },
     methods: {
         toback: function(){
-            this.$router.push("/votepage")
         },
         totagpage: function(){
             this.$router.push("/tagpage")
