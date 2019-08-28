@@ -31,16 +31,19 @@ export default {
         tosignup: function(){
             this.$router.push("/signup")
         },
-        submit: function(){
+        submit: function(userid){
+            //useridをこいつに入れる
+            this.$emit('signin', 1)
             if(this.redirectto == null){
                 this.$router.push("/")
             }else{
                 this.$router.push(this.redirectto)
             }
-        }
+        },
     },
     props: {
-        redirectto: String
+        redirectto: String,
+        userid: Number
     },
     data () {
         return {

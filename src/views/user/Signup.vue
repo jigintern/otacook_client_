@@ -6,6 +6,7 @@ v-container
         #SignupCardArea
             Signupcard(
                 :redirectto="redirectto"
+                @signin="signin"
             )
 </template>
 
@@ -18,6 +19,11 @@ export default{
     },
     props: {
         redirectto: String
+    },
+    methods:{
+        signin: function(userid){
+            this.$emit('signin', userid)
+        }
     }
 }
 </script>

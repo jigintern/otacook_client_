@@ -16,12 +16,13 @@
     </v-app-bar>-->
     <Headercontent 
       :isLoggingin="isLoggingin"
-      @parentMethod="logout"
+      @signout="logout"
     />
     <v-content class="master">
         <router-view
           :isLoggingin="isLoggingin"
           :userid="userid"
+          @signin="login"
         />
     </v-content>
     <Footer/>
@@ -45,9 +46,9 @@ export default {
     }
   },
   methods: {
-    login: function(id){
+    login: function(userid){
       this.isLoggingin = true,
-      this.userid = id
+      this.userid = userid
     },
     logout: function(){
       this.isLoggingin = false,

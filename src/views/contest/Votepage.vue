@@ -58,7 +58,7 @@ div(color="#F7F3E8")
                         )
 
             .text-center.pt-10.pb-12
-                v-btn.title(color="#FFB618" @click="toquestion") 投票
+                v-btn.title(color="#FFB618" @click="toquestion") 投票する
 </template>
 
 <script>

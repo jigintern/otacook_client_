@@ -46,11 +46,16 @@ export default {
             this.$router.push("/signin")
         },
         submit: function(){
+            //useridを入れる
+            this.$emit('signin', 1)
             if(this.redirectto == null){
                 this.$router.push("/")
             }else{
                 this.$router.push(this.redirectto)
             }
+        },
+        loginmethod: function(id){
+            this.$emit('signin', id)
         }
     },
     props:{
