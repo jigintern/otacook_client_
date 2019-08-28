@@ -14,7 +14,7 @@
         <span class="mr-2">Latest Release</span>
       </v-btn>
     </v-app-bar>-->
-      <Headercontent :isLoggingin="isLoggingin"/>
+    <Headercontent :isLoggingin="isLoggingin"/>
     <v-content class="master">
         <router-view
           :isLoggingin="isLoggingin"
@@ -37,10 +37,20 @@ export default {
   },
   data: function(){
     return{
-      isLoggingin: true,
+      isLoggingin: false,
       userid: 0,
     }
   },
+  methods: {
+    login: function(id){
+      isLoggingin = true,
+      serid = id
+    },
+    logout: function(){
+      isLoggingin = false,
+      userid = 0
+    }
+  }
 };
 </script>
 
