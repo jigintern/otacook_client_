@@ -4,6 +4,7 @@ import Questionpage from './views/contest/Questionpage.vue'
 import Answerpage from './views/contest/Answerpage.vue'
 import Rankingpage from './views/contest/Rankingpage.vue'
 import Votepage from './views/contest/Votepage.vue'
+import Resipepage from './views/default/Resipepage.vue'
 import Home from './views/Home.vue'
 import Signin from './views/user/Signin.vue'
 import Signup from './views/user/Signup.vue'
@@ -24,6 +25,12 @@ export default new Router({
       name: 'Signin',
       component: Signin
     },
+    {
+      path: '/resipepage',
+      name: 'Resipepage',
+      component: Resipepage
+    },
+
     {
       path: '/signup',
       name: 'Signup',
