@@ -26,14 +26,15 @@ export default {
         tosignup: function(){
             this.$router.push("/signup")
         },
+        tosignout: function(){
+            this.$router.push("/")
+        },
         tomypage: function(){
             this.$router.push("/mypage")
         }
     },
-    data: function(){
-        return{
-            isLoggingin: false
-        }
+    props: {
+        isLoggingin: Boolean
     },
 }
 </script>
