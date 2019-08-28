@@ -22,8 +22,14 @@ div(color="#F7F3E8")
           :list="resipelist"
         )
 
+      
       .text-center.pt-10.pb-12
-        v-btn.title(color="#FFB618" @click="toanswer") コンテストに提出する
+        div(v-if="isLoggingin == true")
+          v-btn.title(color="#FFB618" @click="toanswer") コンテストに提出する
+        div(v-else)
+          div コンテスト参加にはログインが必要です。
+          v-btn.title(color="#FFB618" @click="tologin") ログイン
+
 </template>
 
 <script>
@@ -52,12 +58,19 @@ export default{
       ]
     }
   },
+  props: {
+    isLoggingin: Boolean,
+    userid: Number
+  },
   methods: {
     tovote: function(){
       this.$router.push("/votepage")
     },
     toanswer: function(){
       this.$router.push("/answerpage")
+    },
+    tologin: function(){
+      this.$router.push("/signin")
     }
   }
 }

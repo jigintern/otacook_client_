@@ -29,7 +29,11 @@ div(color="#F7F3E8")
 
       .text-center.pt-10.pb-12
         //div.text-color 投票済みです
-        v-btn.title(color="#FFB618" @click="toquestion") 送信
+        div(v-if="isLoggingin == true")
+          v-btn.title(color="#FFB618" @click="toquestion") 送信
+        div(v-else)
+          div コンテスト参加にはログインが必要です。
+          v-btn.title(color="#FFB618" @click="tologin") ログイン
 </template>
 
 <script>
@@ -53,9 +57,16 @@ export default{
       },
     }
   },
+  props:{
+    isLoggingin: Boolean,
+    userid: Number
+  },
   methods: {
     toquestion: function(){
       this.$router.push("/questionpage")
+    },
+    tologin: function(){
+      this.$router.push("/loginpage")
     },
   }
 }

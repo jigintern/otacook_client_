@@ -14,9 +14,12 @@
         <span class="mr-2">Latest Release</span>
       </v-btn>
     </v-app-bar>-->
-      <Headercontent/>
+      <Headercontent :isLoggingin="isLoggingin"/>
     <v-content class="master">
-        <router-view/>
+        <router-view
+          :isLoggingin="isLoggingin"
+          :userid="userid"
+        />
     </v-content>
     <Footer/>
   </v-app>
@@ -32,9 +35,12 @@ export default {
     Headercontent,
     Footer
   },
-  data: () => ({
-    //
-  }),
+  data: function(){
+    return{
+      isLoggingin: true,
+      userid: 0,
+    }
+  },
 };
 </script>
 
