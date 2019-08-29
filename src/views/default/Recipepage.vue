@@ -10,7 +10,7 @@ div(color="#F7F3E8")
             v-layout.ma-4
                 div.ml-6.my-auto.caption Tags: 
                 div(v-for="list in tags")
-                    v-btn.ma-1.caption(@click="totagpage" small rounded) {{list}}
+                    v-btn.ma-1.caption(@click="totagpage" small rounded color="#FFCC51") {{list}}
 
             div.mx-4
                 v-card.mx-12

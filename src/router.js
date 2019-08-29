@@ -7,7 +7,7 @@ import Votepage from './views/contest/Votepage.vue'
 import Recipepage from './views/default/Recipepage.vue'
 import Recipepostpage from './views/default/Recipepostpage.vue'
 import Tutorialtoppage from './views/tutorial/Tutorialtoppage.vue'
-import Home from './views/Home.vue'
+import Top from './views/default/Top.vue'
 import Signin from './views/user/Signin.vue'
 import Signup from './views/user/Signup.vue'
 import Mypage from './views/user/Mypage.vue'
@@ -19,8 +19,8 @@ export default new Router({
   routes: [
     {
       path: '/',
-      name: 'Home',
-      component: Home
+      name: 'Top',
+      component: Top
     },
     {
       path: '/signin',
