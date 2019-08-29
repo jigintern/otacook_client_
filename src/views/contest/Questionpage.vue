@@ -4,7 +4,7 @@ div(color="#F7F3E8")
     v-card(class="ma-4")
       //料理の名前を入れる##
       div.headline.ml-2.mb-1 {{ time }}
-      div.display-1.ml-4.font-weight-bold お題: {{ resipetitle }}
+      div.display-1.ml-4.font-weight-bold お題: {{ recipetitle }}
       div.body-2.mr-4.text-right {{ total_member }}人が参加しています
       .text-right.ma-4
         v-btn.title(color="#FFB618" @click="tovote") 投票ページへ
@@ -16,10 +16,10 @@ div(color="#F7F3E8")
           :list= "mateliallist"
         )
       //コンテストレシピを表示するコンポーネント
-      #ResipeArea
-        Resipe(
+      #RecipeArea
+        Recipe(
           class="ma-10 my-4 pb-10"
-          :list="resipelist"
+          :list="recipelist"
         )
 
       
@@ -33,25 +33,25 @@ div(color="#F7F3E8")
 </template>
 
 <script>
-import Resipe from '..//components/Resipe'
+import Recipe from '..//components/Recipe'
 import Materials from '..//components/Materials'
 
 export default{
   components: {
-    Resipe,
+    Recipe,
     Materials
   },
   data: function(){
     return{
       time: "7:00 ~ 8:00",
-      resipetitle:'冷やしキムチラーメン',
+      recipetitle:'冷やしキムチラーメン',
       total_member: 1,
       mateliallist: [
         { name: 'お肉', serving: "一本"},
         { name: '野菜', serving: "日本"},
         { name: '魚', serving: "三枚"},
       ],
-      resipelist: [
+      recipelist: [
         { message: '肉を焼く' },
         { message: '野菜を炒める' },
         { message: '魚を焼く' },

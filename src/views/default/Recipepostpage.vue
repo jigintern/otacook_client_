@@ -10,7 +10,7 @@ div(color="#F7F3E8")
             v-text-field.ma-8.mt-0.pb-4(
                 :counter="30"
                 value=""
-                v-model="resipetitle"
+                v-model="recipetitle"
                 :rules="[rules.required, rules.namemax]"
                 label="料理名を入力！"
                 required)
@@ -41,7 +41,7 @@ div(color="#F7F3E8")
         v-card.ma-4
             .headline.ma-8.mb-0.pt-4 レシピ
             
-            div(v-for="list in resipes")
+            div(v-for="list in recipes")
                 v-text-field.mx-8.mt-0(
                     :counter="50"
                     v-model="list.message"
@@ -50,8 +50,8 @@ div(color="#F7F3E8")
                     required
                 )
             .text-right.mt-6.mr-12.pb-4
-                v-btn.mr-4(@click="resipelistdell" color="#FFB618") レシピリセット
-                v-btn(@click="resipelistadd" color="#FFB618") レシピ追加
+                v-btn.mr-4(@click="recipelistdell" color="#FFB618") レシピリセット
+                v-btn(@click="recipelistadd" color="#FFB618") レシピ追加
 
         v-card.ma-4
             div.headline.ma-8.mb-0.pt-4 写真
@@ -86,11 +86,11 @@ div(color="#F7F3E8")
 export default{
   data: function(){
     return{
-      resipetitle:"",
+      recipetitle:"",
       matelials: [
           { matelial: "", serving: ""}
       ],
-      resipes: [
+      recipes: [
           {message: ""}
       ],
       tags: [
@@ -123,13 +123,13 @@ export default{
     mateliallistdell: function(){
         this.matelials = [{material:"", serving: ""}]
     },
-    resipelistadd: function(){
-        this.resipes.push(
+    recipelistadd: function(){
+        this.recipes.push(
             {message: ""}
         )
     },
-    resipelistdell: function(){
-        this.resipes = [{message: ""}]
+    recipelistdell: function(){
+        this.recipes = [{message: ""}]
     },
     taglistadd: function(){
         this.tags.push(

@@ -4,8 +4,8 @@ import Questionpage from './views/contest/Questionpage.vue'
 import Answerpage from './views/contest/Answerpage.vue'
 import Rankingpage from './views/contest/Rankingpage.vue'
 import Votepage from './views/contest/Votepage.vue'
-import Resipepage from './views/default/Resipepage.vue'
-import Resipepostpage from './views/default/Resipepostpage.vue'
+import Recipepage from './views/default/Recipepage.vue'
+import Recipepostpage from './views/default/Recipepostpage.vue'
 import Tutorialtoppage from './views/tutorial/Tutorialtoppage.vue'
 import Home from './views/Home.vue'
 import Signin from './views/user/Signin.vue'
@@ -58,14 +58,14 @@ export default new Router({
       component: Rankingpage
     },
     {
-      path: '/resipepage',
-      name: 'Resipepage',
-      component: Resipepage
+      path: '/recipepage',
+      name: 'Recipepage',
+      component: Recipepage
     },
     {
-      path: '/resipepostpage',
-      name: 'Resipepostpage',
-      component: Resipepostpage
+      path: '/recipepostpage',
+      name: 'Recipepostpage',
+      component: Recipepostpage
     },
     {
       path: '/tutorialtoppage',

@@ -3,7 +3,7 @@ div(color="#F7F3E8")
     v-container
         v-card(class="ma-4")
 
-            div.display-1.pt-4.ma-4.font-weight-bold {{ resipetitle }}
+            div.display-1.pt-4.ma-4.font-weight-bold {{ recipetitle }}
             
             v-divider.ma-4
 
@@ -26,10 +26,10 @@ div(color="#F7F3E8")
                     :list= "mateliallist"
             )
             //レシピを表示するコンポーネント
-            #ResipeArea
-            Resipe(
+            #RecipeArea
+            Recipe(
                 class="ma-10 my-4 pb-10"
-                :list="resipelist"
+                :list="recipelist"
             )
 
             .text-center.pt-10.pb-12
@@ -37,27 +37,27 @@ div(color="#F7F3E8")
 </template>
 
 <script>
-import Resipe from '..//components/Resipe'  
+import Recipe from '..//components/Recipe'
 import Materials from '..//components/Materials'
 
 export default{
     components: {
-        Resipe,
+        Recipe,
         Materials
     },
     props:{
-        resipeid: Number
+        recipeid: Number
     },
     data: function(){
         return{
-            resipetitle:'冷やしキムチラーメン',
+            recipetitle:'冷やしキムチラーメン',
             topimg: "https://imgfp.hotp.jp/IMGH/21/64/P028842164/P028842164_480.jpg",
             mateliallist: [
                 { name: 'お肉', serving: "一本"},
                 { name: '野菜', serving: "日本"},
                 { name: '魚', serving: "三枚"},
             ],
-            resipelist: [
+            recipelist: [
                 { message: '肉を焼く' },
                 { message: '野菜を炒める' },
                 { message: '魚を焼く' },

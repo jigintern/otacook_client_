@@ -5,7 +5,7 @@ div(color="#F7F3E8")
             //料理の名前を入れる##
             div.display-2.pt-4.ml-4 ランキング
             v-divider.my-2.mx-4
-            div.display-1.mx-4 お題: {{ resipetitle }}
+            div.display-1.mx-4 お題: {{ recipetitle }}
             v-row.mx-4
                 div.headline.ml-2.mb-1 {{ date }}
                 div.headline.ml-2.mb-1 {{ time }}
@@ -34,7 +34,7 @@ export default{
         return{
             date: "2019/8/24",
             time: "7:00 ~ 8:00",
-            resipetitle:'冷やしキムチラーメン',
+            recipetitle:'冷やしキムチラーメン',
             ranking: [
                 { rank: 1, title: "タピオカミルクティー風カレーライスの南蛮漬け", name: "ぴ", icon: "https://vuetifyjs.com/apple-touch-icon-180x180.png", img: "https://imgfp.hotp.jp/IMGH/21/64/P028842164/P028842164_480.jpg", comment: "タピオカミルクティーの風味が効いていてとても美味しいです。"},
                 { rank: 2, title: "タピオカミルクティー風カレーライスの南蛮漬け", name: "ぴ", icon: "https://vuetifyjs.com/apple-touch-icon-180x180.png", img: "https://imgfp.hotp.jp/IMGH/21/64/P028842164/P028842164_480.jpg", comment: "タピオカミルクティーの風味が効いていてとても美味しいです。"},
