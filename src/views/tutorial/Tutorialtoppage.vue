@@ -9,10 +9,18 @@ div(color="#F7F3E8")
             div(v-if="isLoggingin == true")
 
                 div.ma-4
-                    div.display-1 一覧
+                    div.display-1 チュートリアル一覧
                 
                     Tutorialcard(
-                        :title="tutoriallist.title"
+                        :title="cuttitle"
+                        :comment="cutcomment"
+                        :list="cuttutoriallist"
+                    )
+
+                    Tutorialcard(
+                        :title="tyourititle"
+                        :comment="tyouricomment"
+                        :list="tyouritutoriallist"
                     )
             div(v-else)
                 .text-center.pt-10.pb-12
@@ -33,15 +41,14 @@ export default{
     },
     data: function(){
         return{
-        time: "7:00 ~ 8:00",
-        title:'冷やしキムチラーメン',
-        total_member: 1,
-        tutoriallist: [],
-        resipelist: [
-            { message: '肉を焼く' },
-            { message: '野菜を炒める' },
-            { message: '魚を焼く' },
-        ]
+            time: "7:00 ~ 8:00",
+            total_member: 1,
+            cuttitle:'包丁 ( 0 % )',
+            cutcomment: "包丁の使い方を学習できるよ！",
+            cuttutoriallist: ["基本的な使い方", "ざく切り", "輪切り"],
+            tyourititle:'調理 ( 0 % )',
+            tyouricomment: "調理の工程を学習できるよ！",
+            tyouritutoriallist: ["調理器具", "計量・計り方"],
         }
     },
     props: {
