@@ -1,7 +1,7 @@
 <template lang="pug">
 div
     v-toolbar(color="#ffb618")
-        v-toolbar-title オタクック
+        v-btn(text @click="totop").title オタクック
         v-divider.mx-4(vertical)
         .flex-grow-1
         v-text-field(single-line hide-details)
@@ -32,6 +32,9 @@ export default {
         },
         tomypage: function(){
             this.$router.push("/mypage")
+        },
+        totop: function(){
+            this.$router.push("/")
         }
     },
     props: {
