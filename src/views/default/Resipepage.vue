@@ -53,9 +53,9 @@ export default{
             resipetitle:'冷やしキムチラーメン',
             topimg: "https://imgfp.hotp.jp/IMGH/21/64/P028842164/P028842164_480.jpg",
             mateliallist: [
-                { message: 'お肉' },
-                { message: '野菜' },
-                { message: '魚' },
+                { name: 'お肉', serving: "一本"},
+                { name: '野菜', serving: "日本"},
+                { name: '魚', serving: "三枚"},
             ],
             resipelist: [
                 { message: '肉を焼く' },

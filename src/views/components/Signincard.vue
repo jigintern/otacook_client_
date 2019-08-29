@@ -34,6 +34,7 @@ export default {
         submit: function(userid){
             //useridをこいつに入れる
             this.$emit('signin', 1)
+            this.$router.back()
             if(this.redirectto == null){
                 this.$router.push("/")
             }else{
