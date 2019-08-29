@@ -71,12 +71,8 @@ div(color="#F7F3E8")
 </template>
 
 <script>
-import Matelialinput from './Matelialinput'
 
 export default{
-  components: {
-      Matelialinput
-  },
   data: function(){
     return{
       resipetitle:"",
