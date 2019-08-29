@@ -37,18 +37,16 @@ div(color="#F7F3E8")
             .text-right.mt-6.mr-12.pb-4
                 v-btn.mr-4(@click="mateliallistdell" color="#FFB618") リストリセット
                 v-btn(@click="mateliallistadd" color="#FFB618") リスト追加
-
-            div(v-for="list in matelials" v-bind="list") {{list.material}} {{list.serving}}
         
         v-card.ma-4
             .headline.ma-8.mb-0.pt-4 レシピ
             
-            div(v-for="list in resipe")
+            div(v-for="list in resipes")
                 v-text-field.mx-8.mt-0(
                     :counter="50"
                     v-model="list.message"
                     :rules="[rules.required]"
-                    label="レシピを入力！"
+                    label="レシピ"
                     required
                 )
             .text-right.mt-6.mr-12.pb-4
@@ -61,12 +59,25 @@ div(color="#F7F3E8")
                 accept="image/*"
                 label="写真を選択してください！")
 
+        v-card.ma-4
+            .headline.ma-8.mb-0.pt-4 タグ
+            div(v-for="list in tags")
+                v-text-field.mx-8.mt-0(
+                    :counter="50"
+                    v-model="list.message"
+                    :rules="[rules.required]"
+                    label="タグ"
+                    required
+                )
+            .text-right.mt-6.mr-12.pb-4
+                v-btn.mr-4(@click="taglistdell" color="#FFB618") タグリセット
+                v-btn(@click="taglistadd" color="#FFB618") タグ追加
+
         .text-center.pt-10.pb-12
-            //div.text-color 投票済みです
             div(v-if="isLoggingin == true")
-                v-btn.title(color="#FFB618" @click="toquestion") 送信
+                v-btn.title(color="#FFB618" @click="totop") 送信
             div(v-else)
-                div コンテスト参加にはログインが必要です。
+                div レシピ投稿にはログインが必要です。
                 v-btn.title(color="#FFB618" @click="tologin") ログイン
 </template>
 
@@ -79,7 +90,10 @@ export default{
       matelials: [
           { matelial: "", serving: ""}
       ],
-      resipe: [
+      resipes: [
+          {message: ""}
+      ],
+      tags: [
           {message: ""}
       ],
       rules: {
@@ -94,12 +108,13 @@ export default{
     userid: Number
   },
   methods: {
-    toquestion: function(){
-      this.$router.push("/questionpage")
+    totop: function(){
+      this.$router.push("/")
     },
     tologin: function(){
       this.$router.push("/loginpage")
     },
+    
     mateliallistadd: function(){
         this.matelials.push(
             {material:"", serving: ""}
@@ -109,13 +124,21 @@ export default{
         this.matelials = [{material:"", serving: ""}]
     },
     resipelistadd: function(){
-        this.resipe.push(
+        this.resipes.push(
             {message: ""}
         )
     },
     resipelistdell: function(){
-        this.resipe = [{message: ""}]
-    }
+        this.resipes = [{message: ""}]
+    },
+    taglistadd: function(){
+        this.tags.push(
+            {message: ""}
+        )
+    },
+    taglistdell: function(){
+        this.tags = [{message: ""}]
+    },
   }
 }
 </script>
