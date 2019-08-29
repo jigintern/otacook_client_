@@ -4,7 +4,7 @@ div(color="#F7F3E8")
     v-card(class="ma-4")
       //料理の名前を入れる##
       div.headline.ml-2.mb-1 {{ time }}
-      div.display-1.ml-4.font-weight-bold お題: {{ resipetitle }}
+      div.display-1.ml-4.font-weight-bold お題: {{ recipetitle }}
 
       div.headline.ma-8.mb-0 料理名
       v-text-field.ma-8.mt-0(
@@ -39,18 +39,18 @@ div(color="#F7F3E8")
 </template>
 
 <script>
-import Resipe from '..//components/Resipe'
+import Recipe from '..//components/Recipe'
 import Materials from '..//components/Materials'
 
 export default{
   components: {
-    Resipe,
+    Recipe,
     Materials
   },
   data: function(){
     return{
       time: "7:00 ~ 8:00",
-      resipetitle:'冷やしキムチラーメン',
+      recipetitle:'冷やしキムチラーメン',
       total_member: 1,
       title: "",
       comment: "",
