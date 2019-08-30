@@ -17,11 +17,11 @@ div(color="#F7F3E8")
 
         v-card.ma-4
             .headline.ma-8.mb-0.pt-4 材料リスト
-            v-row(v-for="list in matelials" v-bind="list")
+            v-row(v-for="list in matelials")
                 v-text-field.ml-12.mr-4(
                     :counter="30"
                     value=""
-                    v-model="list.material"
+                    v-model="list.matelial"
                     :rules="[rules.required]"
                     label="材料"
                     required
@@ -52,6 +52,8 @@ div(color="#F7F3E8")
             .text-right.mt-6.mr-12.pb-4
                 v-btn.mr-4(@click="recipelistdell" color="#FFB618") レシピリセット
                 v-btn(@click="recipelistadd" color="#FFB618") レシピ追加
+        
+        div {{recipehtml}}
 
         v-card.ma-4
             div.headline.ma-8.mb-0.pt-4 写真
@@ -107,9 +109,18 @@ export default{
     isLoggingin: Boolean,
     userid: Number
   },
+  computed: {
+      recipehtml: function(){
+          let html = ""
+          this.matelials.forEach(matelials => {
+              html += matelials.matelial + matelials.serving
+          });
+          return html
+      }
+  },
   methods: {
     totop: function(){
-      this.$router.push("/")
+        this.$router.push("/")
     },
     tologin: function(){
       this.$router.push("/loginpage")
@@ -117,11 +128,11 @@ export default{
     
     mateliallistadd: function(){
         this.matelials.push(
-            {material:"", serving: ""}
+            {matelial:"", serving: ""}
         )
     },
     mateliallistdell: function(){
-        this.matelials = [{material:"", serving: ""}]
+        this.matelials = [{matelial:"", serving: ""}]
     },
     recipelistadd: function(){
         this.recipes.push(
