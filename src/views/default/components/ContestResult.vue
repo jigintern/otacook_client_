@@ -1,4 +1,4 @@
 <template lang="pug">
     v-card
-        v-card-title コンテストの結果ページの案内
+        v-card-title 前回コンテスト結果
 </template>

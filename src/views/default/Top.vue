@@ -1,31 +1,54 @@
 <template>
 <div>
+<v-card class="ma-4 py-1">
     <v-card class="ma-4" height="40vh">
-        <v-card-title>ここにサービスの概要みたいなの入れたい</v-card-title>
+        <v-img
+          :src="require('../../assets/top.png')"
+        ></v-img>
     </v-card>
-    <v-row class="ma-2">
-        <v-col>
-            <ContestYokoku v-if="isActiveContestYokoku === true"/>
-        </v-col>
-        <v-col>
-            <ContestResult v-if="isActiveContestResult === true"/>
-        </v-col>
-    </v-row>
+    <h1 class="ma-4">
+        Otacookで好きなメシを作ろう！
+    </h1>
+    <div class= "mx-8 body-2">
+        Otacookは料理を作り、対戦しながら学べるサービスです。
+    </div>
+    <div class= "mx-8 body-2">
+        コンテストでは、日本中の人が同じ料理を作り対戦することができます。また、ほかの人がどのように作ったかを見ることができます。
+    </div>
+    <div class= "mx-8 body-2">
+        コンテストの結果からレートが出るので、日本中の人と対戦しながら料理の腕前を上げることができます。
+    </div>
+        <ContestResult
+            class="ma-4"
+            v-if="isActiveContestResult === true"
+        />
+        <ContestNow
+            class="ma-4" 
+            v-if="isActiveContestNow === true"
+        />
+        <ContestYokoku 
+            class="ma-4" 
+            v-if="isActiveContestYokoku === true"
+        />
+</v-card>
 </div>
 </template>
 
 <script>
 import ContestYokoku from "./components/ContestYokoku"
+import ContestNow from "./components/ContestNow"
 import ContestResult from "./components/ContestResult"
 
 export default {
     components: {
         ContestYokoku,
+        ContestNow,
         ContestResult
     },
     data: function(){
         return {
-            isActiveContestYokoku: true,
+            isActiveContestYokoku: false,
+            isActiveContestNow: true,
             isActiveContestResult: false,
         }
     },

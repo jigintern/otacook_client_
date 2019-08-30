@@ -8,6 +8,9 @@
         Materials.ma-4(
             :list="materiallist"
         )
+        .text-center.ma-4
+          v-btn.title(color="#FFB618" @click="toquestion") 問題ページへ
+
 </template>
 <script>
 import Materials from "../../components/Materials"
@@ -17,7 +20,7 @@ export default {
     },
     data: function(){
         return {
-            title: "次回開催予定のコンテスト",
+            title: "現在開催中のコンテスト",
             time: "7:00~8:00",
             votetime: "8:00~9:00",
             jsonlist:'[{"name":"タピオカ","serving":"1kg"},{"name":"天気の子","serving":"10000"},{"name":"肉","serving":"焼肉"},{"name":"あは","serving":"いひ"}]',
@@ -28,6 +31,11 @@ export default {
             var array = JSON.parse(this.jsonlist)
             return array
         },
+    },
+    methods: {
+        toquestion: function(){
+            this.$router.push('/questionpage')
+        }
     },
 }
 </script>
