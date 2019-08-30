@@ -25,9 +25,14 @@ div(color="#F7F3E8")
         required
 
       div.headline.ma-8.mb-0 写真
+      //input(
+        type="file"
+      //)
       v-file-input.ma-8.mt-0(
+        @change="selectfile"
         accept="image/*"
-        label="写真を選択してください！")
+        label="写真を選択してください！"
+        )
 
       .text-center.pt-10.pb-12
         div(v-if="isLoggingin == true")
@@ -53,6 +58,7 @@ export default{
       time: "7:00 ~ 8:00",
       resipetitle:'冷やしキムチラーメン',
       total_member: 1,
+      uploadFile: null,
       name: "",
       outline: "",
       error: "",
@@ -71,6 +77,11 @@ export default{
     //useridをサーバーに送って投票状況を確認する？
   },
   methods: {
+    selectfile :function(e){
+      console.log(e)
+      var file = e.data
+      this.uploadFile = file
+    },
     toquestion: function(){
       if(this.name=="" || this.outline==""){
         this.error="すべての項目を入力してから送信してください！"
