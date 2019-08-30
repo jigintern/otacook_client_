@@ -75,6 +75,7 @@ export default{
             date: "2019/8/24",
             time: "7:00 ~ 8:00",
             recipetitle:'冷やしキムチラーメン',
+            jsonmember: '',//jsonで取得して配列に変換する
             member: [
                 { number: 1, title: "タピオカミルクティー風カレーライスの南蛮漬け", name: "ぴ", icon: "https://vuetifyjs.com/apple-touch-icon-180x180.png", img: "https://imgfp.hotp.jp/IMGH/21/64/P028842164/P028842164_480.jpg", comment: "タピオカミルクティーの風味が効いていてとても美味しいです。"},
                 { number: 2, title: "タピオカカルピスソーダ風カレーライスの南蛮漬け", name: "ぴ", icon: "https://vuetifyjs.com/apple-touch-icon-180x180.png", img: "https://imgfp.hotp.jp/IMGH/21/64/P028842164/P028842164_480.jpg", comment: "タピオカミルクティーの風味が効いていてとても美味しいです。"},

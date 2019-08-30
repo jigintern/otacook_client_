@@ -9,8 +9,8 @@ div(color="#F7F3E8")
 
             v-layout.ma-4
                 div.ml-6.my-auto.caption Tags: 
-                div(v-for="list in tags")
-                    v-btn.ma-1.caption(@click="totagpage" small rounded color="#FFCC51") {{list}}
+                div(v-for="list in tagslist")
+                    v-btn.ma-1.caption(@click="totagpage" small rounded color="#FFCC51") {{list.message}}
 
             div.mx-4
                 v-card.mx-12
@@ -20,10 +20,10 @@ div(color="#F7F3E8")
                     )
 
             //材料を表示するコンポーネント
-            #MatelialsArea
+            #materialsArea
                 Materials(
                     class="ma-10 my-4 pb-4"
-                    :list= "mateliallist"
+                    :list= "materiallist"
             )
             //レシピを表示するコンポーネント
             #RecipeArea
@@ -48,21 +48,27 @@ export default{
     props:{
         recipeid: Number
     },
+    computed: {
+        materiallist: function(){
+            var array = JSON.parse(this.jsonmaterials)
+            return array
+        },
+        recipelist: function(){
+            var array = JSON.parse(this.jsonrecipes)
+            return array
+        },
+        tagslist: function(){
+            var array = JSON.parse(this.jsontags)
+            return array
+        }
+    },
     data: function(){
         return{
             recipetitle:'冷やしキムチラーメン',
             topimg: "https://imgfp.hotp.jp/IMGH/21/64/P028842164/P028842164_480.jpg",
-            mateliallist: [
-                { name: 'お肉', serving: "一本"},
-                { name: '野菜', serving: "日本"},
-                { name: '魚', serving: "三枚"},
-            ],
-            recipelist: [
-                { message: '肉を焼く' },
-                { message: '野菜を炒める' },
-                { message: '魚を焼く' },
-            ],
-            tags: ['天気の子', 'あは', 'あはは']
+            jsonmaterials: '[{"name":"タピオカ","serving":"1kg"},{"name":"天気の子","serving":"10000"},{"name":"肉","serving":"焼肉"},{"name":"あは","serving":"いひ"}]',
+            jsonrecipes: '[{"message":"肉を焼く"},{"message":"食べる"},{"message":"炒める"},{"message":"あは"}]',
+            jsontags: '[{"message":"天気の子"},{"message":"タピオカ"},{"message":"焼肉"}]',
         }
     },
     methods: {

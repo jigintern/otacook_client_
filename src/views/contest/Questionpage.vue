@@ -10,10 +10,10 @@ div(color="#F7F3E8")
         v-btn.title(color="#FFB618" @click="tovote") 投票ページへ
       
       //コンテスト材料を表示するコンポーネント
-      #MatelialsArea
+      #materialsArea
         Materials(
           class="ma-10 my-4 pb-4"
-          :list= "mateliallist"
+          :list= "materiallist"
         )
       //コンテストレシピを表示するコンポーネント
       #RecipeArea
@@ -46,22 +46,24 @@ export default{
       time: "7:00 ~ 8:00",
       recipetitle:'冷やしキムチラーメン',
       total_member: 1,
-      mateliallist: [
-        { name: 'お肉', serving: "一本"},
-        { name: '野菜', serving: "日本"},
-        { name: '魚', serving: "三枚"},
-      ],
-      recipelist: [
-        { message: '肉を焼く' },
-        { message: '野菜を炒める' },
-        { message: '魚を焼く' },
-      ]
+      jsonmaterials: '[{"name":"タピオカ","serving":"1kg"},{"name":"天気の子","serving":"10000"},{"name":"肉","serving":"焼肉"},{"name":"あは","serving":"いひ"}]',
+      jsonrecipes: '[{"message":"肉を焼く"},{"message":"食べる"},{"message":"炒める"},{"message":"あは"}]',
     }
   },
   props: {
     isLoggingin: Boolean,
     userid: Number
   },
+  computed: {
+        materiallist: function(){
+            var array = JSON.parse(this.jsonmaterials)
+            return array
+        },
+        recipelist: function(){
+            var array = JSON.parse(this.jsonrecipes)
+            return array
+        },
+    },
   methods: {
     tovote: function(){
       this.$router.push("/votepage")

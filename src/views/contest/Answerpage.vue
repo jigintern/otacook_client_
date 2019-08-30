@@ -31,7 +31,7 @@ div(color="#F7F3E8")
 
       .text-center.pt-10.pb-12
         div(v-if="isLoggingin == true")
-          div.red--text {{ errors }}
+          div.red--text.mb-4 {{ error }}
           v-btn.title(color="#FFB618" @click="toquestion") 送信
         div(v-else)
           div コンテスト参加にはログインが必要です。
@@ -55,7 +55,7 @@ export default{
       total_member: 1,
       name: "",
       outline: "",
-      errors: "",
+      error: "",
       rules: {
         required: value => !!value || '入力必須項目です。',
         namemax: v => v.length <= 30 || '30文字以内でオナシャス',
@@ -67,11 +67,15 @@ export default{
     isLoggingin: Boolean,
     userid: Number
   },
+  created: function(){
+    //useridをサーバーに送って投票状況を確認する？
+  },
   methods: {
     toquestion: function(){
       if(this.name=="" || this.outline==""){
-        this.errors="すべての項目を入力してから送信してください！"
+        this.error="すべての項目を入力してから送信してください！"
       }else{
+        this.error = ""
         const params = new URLSearchParams()
         params.append('qi', 1)
         params.append('ui', 3)
@@ -79,11 +83,12 @@ export default{
         params.append('co', this.outline)
         axios.post('http://localhost:8080/answer/insert', params)
           .catch(error => {
-            console.log(error);
-            window.alert("送信失敗")
-          }).then(Response => {
-            this.$router.push('/')
+            this.error = "送信に失敗しました"
+            window.alert("送信に失敗しました")
           })
+          .then(Response => {
+            this.$router.push('/')
+          })  
       }
     },
     tologin: function(){
