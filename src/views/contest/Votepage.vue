@@ -58,6 +58,7 @@ div(color="#F7F3E8")
                         )
 
             .text-center.pt-10.pb-12
+                div.mb-4.red--text {{error}}
                 v-btn.title(color="#FFB618" @click="toquestion") 投票する
 </template>
 
@@ -70,6 +71,7 @@ export default{
     },
     data: function(){
         return{
+            error: "",
             date: "2019/8/24",
             time: "7:00 ~ 8:00",
             recipetitle:'冷やしキムチラーメン',
@@ -122,7 +124,12 @@ export default{
     },
     methods: {
         toquestion: function(){
-            this.$router.push("/questionpage")
+            if(this.selected1 == "" || this.selected2 == "" || this.selected3 == ""){
+                this.error = "選択していない項目があります"
+            }else{
+                //サーバーに選択内容を送信する
+                this.$router.push("/questionpage")
+            }
         },
     }
     }
