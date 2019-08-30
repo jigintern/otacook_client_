@@ -17,12 +17,18 @@ export default{
     components: {
         Signupcard
     },
+    created: function(){
+        if(this.isLoggingin == true){
+            this.$router.push("/")
+        }
+    },
     props: {
+        isLoggingin: Boolean,
         redirectto: String
     },
     methods:{
-        signin: function(userid){
-            this.$emit('signin', userid)
+        signin: function(sessionid, userid){
+            this.$emit('signin', sessionid, userid)
         }
     }
 }

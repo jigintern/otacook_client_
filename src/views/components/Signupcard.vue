@@ -3,12 +3,14 @@
 <form>
     <v-text-field
         class="mx-4 pt-5"
+        v-model="username"
         :rules="[rules.required]"
         label="ユーザー名"
         required
     ></v-text-field>
     <v-text-field
         class="mx-4"
+        v-model="email"
         :rules="[rules.required]"
         label="メールアドレス"
         required
@@ -28,6 +30,7 @@
         label="利用規約に同意する。"
         required
     ></v-checkbox>
+    <div class="text-right mr-4 red--text"> {{error}} </div>
     <v-layout justify-space-around="">
         <v-layout class="tosignup">
             <div class="moji ml-4">会員の方は</div>
@@ -46,12 +49,20 @@ export default {
             this.$router.push("/signin")
         },
         submit: function(){
-            //useridを入れる
-            this.$emit('signin', 1)
-            if(this.redirectto == null){
-                this.$router.push("/")
+            if(this.email == "" || this.password == "" || this.username == ""){
+                this.error = "入力していない項目があります"
             }else{
-                this.$router.push(this.redirectto)
+                //mail, userid, passwordをサーバーに送信する
+                //会員登録をサーバーで処理して
+                //sessionid, useridを取得する
+                this.sessionid = 1
+                this.userid = 1
+                this.$emit('signin', this.sessionid, this.userid)
+                if(this.redirectto == null){
+                    this.$router.push("/")
+                }else{
+                    this.$router.push(this.redirectto)
+                }
             }
         },
         loginmethod: function(id){
@@ -63,6 +74,11 @@ export default {
     },
     data () {
         return {
+            error: "",
+            username: "",
+            email:"",
+            password:"",
+            passwordarea: "",
             rules: {
                 required: value => !!value || '入力必須',
                 min: v => v.length >= 8 || '八文字以上でオナシャス',

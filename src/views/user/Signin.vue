@@ -19,11 +19,12 @@ export default{
     },
     props:{
         redirectto: String,
+        sessionid: Number,
         userid: Number
     },
     methods:{
-        signin: function(userid){
-            this.$emit('signin', userid)
+        signin: function(sessionid, userid){
+            this.$emit('signin', sessionid, userid)
         }
     }
 }
