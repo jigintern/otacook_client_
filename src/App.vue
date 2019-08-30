@@ -15,13 +15,13 @@
       </v-btn>
     </v-app-bar>-->
     <Headercontent 
-      :isLoggingin="isLoggingin"
+      :isLoggingin="AppisLoggingin"
       @signout="logout"
     />
     <v-content class="master">
         <router-view
-          :isLoggingin="isLoggingin"
-          :userid="userid"
+          :isLoggingin="AppisLoggingin"
+          :userid="Appuserid"
           @signin="login"
         />
     </v-content>
@@ -32,6 +32,7 @@
 <script>
 import Headercontent from './views/components/Header'
 import Footer from './views/components/Footer'
+import Cookies from 'js-cookie';
 
 export default {
   name: 'App',
@@ -41,18 +42,42 @@ export default {
   },
   data: function(){
     return{
-      isLoggingin: true,
-      userid: 0,
+      AppisLoggingin: false,
+      Appuserid: -1,
+      Appsessionid: -1,
+    }
+  },
+  computed:{
+
+  },
+  //初回読み込み時にクッキーからセッションID呼び出し
+  created: function(){
+    const sessionid = Cookies.get('sessionid')
+    if(sessionid == -1){
+      this.AppisLoggingin = false
+    }else if(sessionid == undefined){
+      this.AppisLoggingin = false
+    }else{
+      //ここでセッションIDをサーバーに送ってログイン状態を確認
+      //true なら以下のプロパティをセット
+      //false ならCookieのsessionidを-1に
+      //Applogginginはfalseにする
+      this.Appuserid = 1 //取得したuseridを入れる
+      this.Appsessionid = sessionid
+      this.AppisLoggingin = true
     }
   },
   methods: {
-    login: function(userid){
-      this.isLoggingin = true,
-      this.userid = userid
+    login: function(sessionid, userid){
+      this.AppisLoggingin = true
+      this.Appuserid = userid
+      this.Appsessionid = sessionid
+      Cookies.set('sessionid', sessionid);
     },
     logout: function(){
-      this.isLoggingin = false,
-      this.userid = 0
+      //セッションIDをサーバーに送る
+      this.AppisLoggingin = false
+      Cookies.set('sessionid', -1);
     }
   }
 };
