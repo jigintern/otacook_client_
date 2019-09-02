@@ -11,7 +11,7 @@
                 div.title {{ username }}
         v-divider
         div.usercardmailarea
-            div.subtitle-2 メールアドレス
+            div.subtitle-2 ユーザーID
             div.title {{ email }}
 </template>
 

@@ -12,7 +12,7 @@
         class="mx-4"
         v-model="email"
         :rules="[rules.required]"
-        label="メールアドレス"
+        label="ユーザーID"
         required
     ></v-text-field>
     <v-text-field
@@ -65,7 +65,7 @@ export default {
                 .then(function (response) {
                     console.log(response.data);
                     if(response.data == "-1"){
-                        self.error = "登録済みのメールアドレスです"
+                        self.error = "使用されているユーザーIDです"
                     }else{
                         //var data = JSON.parse(response.data)
                         var data = response.data

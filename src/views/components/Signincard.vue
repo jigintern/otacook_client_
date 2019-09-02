@@ -5,7 +5,7 @@
         :rules="[rules.required]"
         v-model="email"
         class="mx-4 pt-5"
-        label="メールアドレス"
+        label="ユーザーID"
         required
     ></v-text-field>
     <v-text-field
@@ -66,7 +66,7 @@ export default {
                 .then(function (response) {
                     console.log(response.data);
                     if(response.data == "/USER/"){
-                        self.errors = "メールアドレスを確認"
+                        self.errors = "ユーザーIDを確認"
                     }else if(response.data == "/PASS/"){
                         self.errors = "パスワードを確認"
                     }else{
