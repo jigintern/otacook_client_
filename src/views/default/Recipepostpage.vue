@@ -17,11 +17,11 @@ div(color="#F7F3E8")
 
         v-card.ma-4
             .headline.ma-8.mb-0.pt-4 材料リスト
-            v-row(v-for="list in matelials")
+            v-row(v-for="list in materials")
                 v-text-field.ml-12.mr-4(
                     :counter="30"
                     value=""
-                    v-model="list.matelial"
+                    v-model="list.name"
                     :rules="[rules.required]"
                     label="材料"
                     required
@@ -35,9 +35,17 @@ div(color="#F7F3E8")
                     required
                 )
             .text-right.mt-6.mr-12.pb-4
-                v-btn.mr-4(@click="mateliallistdell" color="#FFB618") リストリセット
-                v-btn(@click="mateliallistadd" color="#FFB618") リスト追加
-        
+                v-btn.mr-4(@click="materiallistdell" color="#FFB618") リストリセット
+                v-btn(@click="materiallistadd" color="#FFB618") リスト追加
+
+        //材料を表示するコンポーネント
+        #materialsArea
+            Materials(
+                class="ma-10 my-4 pb-4"
+                :list= "materiallist"
+        )
+        div {{this.jsonmaterials}}
+
         v-card.ma-4
             .headline.ma-8.mb-0.pt-4 レシピ
             
@@ -52,8 +60,6 @@ div(color="#F7F3E8")
             .text-right.mt-6.mr-12.pb-4
                 v-btn.mr-4(@click="recipelistdell" color="#FFB618") レシピリセット
                 v-btn(@click="recipelistadd" color="#FFB618") レシピ追加
-        
-        div {{recipehtml}}
 
         v-card.ma-4
             div.headline.ma-8.mb-0.pt-4 写真
@@ -84,72 +90,88 @@ div(color="#F7F3E8")
 </template>
 
 <script>
-
+import Materials from '..//components/Materials'
+import { returnStatement } from 'babel-types';
 export default{
-  data: function(){
-    return{
-      recipetitle:"",
-      matelials: [
-          { matelial: "", serving: ""}
-      ],
-      recipes: [
-          {message: ""}
-      ],
-      tags: [
-          {message: ""}
-      ],
-      rules: {
-        required: value => !!value || '入力必須項目です。',
-        namemax: v => v.length <= 30 || '30文字以内でオナシャス',
-        commentmax: v => v.length <= 140 || '140文字以内でオナシャス',
-      },
+    components: {
+        Materials
+    },
+    data: function(){
+        return{
+        recipetitle:"",
+        materials: [
+            { name: "", serving: ""}
+        ],
+        recipes: [
+            {message: ""}
+        ],
+        tags: [
+            {message: ""}
+        ],
+        rules: {
+            required: value => !!value || '入力必須項目です。',
+            namemax: v => v.length <= 30 || '30文字以内でオナシャス',
+            commentmax: v => v.length <= 140 || '140文字以内でオナシャス',
+        },
+        }
+    },
+    props:{
+        isLoggingin: Boolean,
+        userid: Number
+    },
+    computed: {
+        jsonmaterials: function(){
+            var jsontext = JSON.stringify(this.materials)
+            console.log(jsontext)
+            return jsontext
+        },
+        jsonrecipes: function(){
+            var jsontext = JSON.stringify(this.recipes)
+            console.log(jsontext)
+            return jsontext
+        },
+        jsontags: function(){
+            var jsontext = JSON.stringify(this.tags)
+            console.log(jsontext)
+            return jsontext
+        },
+        materiallist: function(){
+            var array = JSON.parse(this.jsonmaterials)
+            return array
+        },
+    },
+    methods: {
+        totop: function(){
+            this.$router.push("/")
+        },
+        tologin: function(){
+        this.$router.push("/loginpage")
+        },
+        
+        materiallistadd: function(){
+            this.materials.push(
+                {name:"", serving: ""}
+            )
+        },
+        materiallistdell: function(){
+            this.materials = [{name:"", serving: ""}]
+        },
+        recipelistadd: function(){
+            this.recipes.push(
+                {message: ""}
+            )
+        },
+        recipelistdell: function(){
+            this.recipes = [{message: ""}]
+        },
+        taglistadd: function(){
+            this.tags.push(
+                {message: ""}
+            )
+        },
+        taglistdell: function(){
+            this.tags = [{message: ""}]
+        },
     }
-  },
-  props:{
-    isLoggingin: Boolean,
-    userid: Number
-  },
-  computed: {
-      recipehtml: function(){
-          let html = ""
-          this.matelials.forEach(matelials => {
-              html += matelials.matelial + matelials.serving
-          });
-          return html
-      }
-  },
-  methods: {
-    totop: function(){
-        this.$router.push("/")
-    },
-    tologin: function(){
-      this.$router.push("/loginpage")
-    },
-    
-    mateliallistadd: function(){
-        this.matelials.push(
-            {matelial:"", serving: ""}
-        )
-    },
-    mateliallistdell: function(){
-        this.matelials = [{matelial:"", serving: ""}]
-    },
-    recipelistadd: function(){
-        this.recipes.push(
-            {message: ""}
-        )
-    },
-    recipelistdell: function(){
-        this.recipes = [{message: ""}]
-    },
-    taglistadd: function(){
-        this.tags.push(
-            {message: ""}
-        )
-    },
-    taglistdell: function(){
-        this.tags = [{message: ""}]
-    },
-  }
 }
 </script>

@@ -25,13 +25,18 @@ div(color="#F7F3E8")
         required
 
       div.headline.ma-8.mb-0 写真
+      //input(
+        type="file"
+      //)
       v-file-input.ma-8.mt-0(
+        @change="selectfile"
         accept="image/*"
-        label="写真を選択してください！")
+        label="写真を選択してください！"
+        )
 
       .text-center.pt-10.pb-12
         div(v-if="isLoggingin == true")
-          div.red--text {{ errors }}
+          div.red--text.mb-4 {{ error }}
           v-btn.title(color="#FFB618" @click="toquestion") 送信
         div(v-else)
           div コンテスト参加にはログインが必要です。
@@ -41,6 +46,7 @@ div(color="#F7F3E8")
 <script>
 import Recipe from '..//components/Recipe'
 import Materials from '..//components/Materials'
+import Cookies from 'js-cookie'
 import axios from 'axios'
 
 export default{
@@ -50,12 +56,14 @@ export default{
   },
   data: function(){
     return{
-      time: "7:00 ~ 8:00",
-      resipetitle:'冷やしキムチラーメン',
+      time: "7",
+      resipetitle:'',
       total_member: 1,
+      uploadFile: null,
+      url: "https://imgfp.hotp.jp/IMGH/21/64/P028842164/P028842164_480.jpg",
       name: "",
       outline: "",
-      errors: "",
+      error: "",
       rules: {
         required: value => !!value || '入力必須項目です。',
         namemax: v => v.length <= 30 || '30文字以内でオナシャス',
@@ -67,23 +75,50 @@ export default{
     isLoggingin: Boolean,
     userid: Number
   },
+  created: function(){
+    //useridをサーバーに送って投票状況を確認する？
+  },
+  computed: {
+        contestid: function(){
+            var contestid = Cookies.get('contestid')
+            return contestid
+        }
+  },
+  mounted: function(){
+    let self = this
+    //情報取得
+    axios.get('http://localhost:8080/api/contest/info/'+String(self.contestid))
+    .then(function (response) {
+        var data = response.data
+        console.log(data["title"])
+        console.log(data["time"])
+        console.log(data["votetime"])
+        self.resipetitle = data["title"]
+        self.time = data["time"]
+    })
+  },
   methods: {
+    selectfile :function(e){
+      console.log(e)
+      var file = e.data
+      this.uploadFile = file
+    },
     toquestion: function(){
-      if(this.name=="" || this.outline==""){
-        this.errors="すべての項目を入力してから送信してください！"
+      let self = this
+      if(this.name=="" || this.outline=="" || this.url==""){
+        this.error="すべての項目を入力してから送信してください！"
       }else{
-        const params = new URLSearchParams()
-        params.append('qi', 1)
-        params.append('ui', 3)
-        params.append('cn', this.name)
-        params.append('co', this.outline)
-        axios.post('http://localhost:8080/answer/insert', params)
-          .catch(error => {
-            console.log(error);
-            window.alert("送信失敗")
-          }).then(Response => {
-            this.$router.push('/')
-          })
+        this.error = ""
+        axios.post('http://localhost:8080/api/contest/send',{   
+            userid:this.userid,
+            contestid:this.contestid,
+            title: this.name,
+            comment: this.outline,
+            url: this.url
+        })
+      .then(function (response) {
+        self.$router.push("/questionpage")
+      })
       }
     },
     tologin: function(){

@@ -43,6 +43,7 @@
 </template>
 
 <script>
+import axios from 'axios'
 export default {
     methods: {
         tosignin: function(){
@@ -55,14 +56,27 @@ export default {
                 //mail, userid, passwordをサーバーに送信する
                 //会員登録をサーバーで処理して
                 //sessionid, useridを取得する
-                this.sessionid = 1
-                this.userid = 1
-                this.$emit('signin', this.sessionid, this.userid)
-                if(this.redirectto == null){
-                    this.$router.push("/")
-                }else{
-                    this.$router.push(this.redirectto)
-                }
+                let self = this
+                axios.post('http://localhost:8080/api/signup',{
+                    email: this.email,
+                    password: this.password,
+                    username: this.username
+                })
+                .then(function (response) {
+                    console.log(response.data);
+                    if(response.data == "-1"){
+                        self.errors = "登録済みです"
+                    }else{
+                        //var data = JSON.parse(response.data)
+                        var data = response.data
+                        //console.log(data["userid"])
+                        //console.log(data["sessionid"])
+                        self.userid = Number(data["userid"])
+                        self.sessionid = Number(data["sessionid"])
+                        self.$emit('signin', self.sessionid, self.userid)
+                        self.$router.push("/")
+                    }
+                })
             }
         },
         loginmethod: function(id){

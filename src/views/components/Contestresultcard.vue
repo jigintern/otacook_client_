@@ -27,7 +27,7 @@ export default {
         name: String,
         img: String,
         icon: String,
-        number: Number,
+        number: String,
         comment: String,
         isnameshow: Boolean
     },
