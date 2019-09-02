@@ -28,7 +28,6 @@ export default {
         },
         tosignout: function(){
             this.$emit('signout')
-            this.$router.push("/")
         },
         tomypage: function(){
             this.$router.push("/mypage")

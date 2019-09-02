@@ -1,10 +1,12 @@
 <template>
 <div>
 <v-card class="ma-4 py-1">
-    <v-card class="ma-4" height="40vh">
-        <v-img
-          :src="require('../../assets/top.png')"
-        ></v-img>
+    <v-card class="ma-4">
+        <div class="text-center">
+            <v-img
+                :src="require('../../assets/top.png')"
+            ></v-img>
+        </div>
     </v-card>
     <h1 class="ma-4">
         Otacookで好きなメシを作ろう！
@@ -21,14 +23,17 @@
         <ContestResult
             class="ma-4"
             v-if="isActiveContestResult === true"
+            :contestid="contestid"
         />
         <ContestNow
             class="ma-4" 
             v-if="isActiveContestNow === true"
+            :contestid="contestid"
         />
         <ContestYokoku 
             class="ma-4" 
             v-if="isActiveContestYokoku === true"
+            :contestid="contestid"
         />
 </v-card>
 </div>
@@ -38,8 +43,29 @@
 import ContestYokoku from "./components/ContestYokoku"
 import ContestNow from "./components/ContestNow"
 import ContestResult from "./components/ContestResult"
+import axios from 'axios'
 
 export default {
+    mounted: function(){
+        let self = this
+        //実行中のコンテストのIDを取得
+        //実行中から結果発表までがnow
+        axios.get('http://localhost:8080/api/contest/now')
+        .then(function (response) {
+            var data = response.data
+            console.log(data["contestid"])
+            console.log(data["status"])
+            self.contestid = data["contestid"]
+            self.status = data["status"]
+            if(self.status == "1" || self.status == "2"){
+                self.isActiveContestNow = true
+            }
+            //2は投票中
+            if(self.status == "3"){
+                self.isActiveContestResult = true
+            }
+        })
+    },
     components: {
         ContestYokoku,
         ContestNow,
@@ -47,8 +73,10 @@ export default {
     },
     data: function(){
         return {
+            contestid: 0,
+            status: 0,
             isActiveContestYokoku: false,
-            isActiveContestNow: true,
+            isActiveContestNow: false,
             isActiveContestResult: false,
         }
     },

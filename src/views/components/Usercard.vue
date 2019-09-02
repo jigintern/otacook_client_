@@ -16,11 +16,26 @@
 </template>
 
 <script>
+import axios from 'axios'
 export default {
+    props:{
+        userid: Number
+    },
+    mounted: function(){
+        let self = this
+        axios.get('http://localhost:8080/api/userinfo/'+String(this.userid))
+        .then(function (response) {
+            var data = response.data
+            console.log(data["username"])
+            console.log(data["email"])
+            self.username = data["username"]
+            self.email = data["email"]
+        })
+    },
     data: function(){
         return{
-            username:'ぴPI',
-            email: "ahahanoha@gmail.com"
+            username:"",
+            email: ""
         }
     }
 }

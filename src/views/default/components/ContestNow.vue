@@ -1,6 +1,7 @@
 <template lang="pug">
     v-card.py-1
-        v-card-title {{title}}
+        v-card-title 現在開催中のコンテスト
+        .title.mx-8 {{title}}
         .subtitle-1.mx-8 開催時間: {{time}}
         .subtitle-1.mx-8 投票時間: {{votetime}}
 
@@ -14,17 +15,41 @@
 </template>
 <script>
 import Materials from "../../components/Materials"
+import Cookies from 'js-cookie'
+import axios from 'axios'
+
 export default {
     components: {
         Materials
     },
+    props: {
+        contestid: String
+    },
     data: function(){
         return {
-            title: "現在開催中のコンテスト",
-            time: "7:00~8:00",
-            votetime: "8:00~9:00",
-            jsonlist:'[{"name":"タピオカ","serving":"1kg"},{"name":"天気の子","serving":"10000"},{"name":"肉","serving":"焼肉"},{"name":"あは","serving":"いひ"}]',
+            title: "お題: ",
+            time: "",
+            votetime: "",
+            jsonlist:'[]',
         }
+    },
+    mounted: function(){
+        let self = this
+        axios.get('http://localhost:8080/api/contest/info/'+String(this.contestid))
+        .then(function (response) {
+            var data = response.data
+            console.log(data["title"])
+            console.log(data["time"])
+            console.log(data["votetime"])
+            self.title = "お題:"+data["title"]
+            self.time = data["time"]
+            self.votetime = data["votetime"]
+        })
+
+        axios.get('http://localhost:8080/api/contest/materialsinfo/'+String(this.contestid))
+        .then(function (response) {
+            self.jsonlist = "[" + response.data + "]"
+        })
     },
     computed: {
         materiallist: function(){
@@ -34,6 +59,7 @@ export default {
     },
     methods: {
         toquestion: function(){
+            Cookies.set('contestid', String(this.contestid))
             this.$router.push('/questionpage')
         }
     },

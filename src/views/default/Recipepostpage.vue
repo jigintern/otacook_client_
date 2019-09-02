@@ -39,12 +39,13 @@ div(color="#F7F3E8")
                 v-btn(@click="materiallistadd" color="#FFB618") リスト追加
 
         //材料を表示するコンポーネント
-            #materialsArea
-                Materials(
-                    class="ma-10 my-4 pb-4"
-                    :list= "materiallist"
-            )
-            div {{this.jsonmatelials}}
+        #materialsArea
+            Materials(
+                class="ma-10 my-4 pb-4"
+                :list= "materiallist"
+        )
+        div {{this.jsonmaterials}}
+
         v-card.ma-4
             .headline.ma-8.mb-0.pt-4 レシピ
             
@@ -119,7 +120,7 @@ export default{
         userid: Number
     },
     computed: {
-        jsonmatelials: function(){
+        jsonmaterials: function(){
             var jsontext = JSON.stringify(this.materials)
             console.log(jsontext)
             return jsontext
@@ -133,6 +134,10 @@ export default{
             var jsontext = JSON.stringify(this.tags)
             console.log(jsontext)
             return jsontext
+        },
+        materiallist: function(){
+            var array = JSON.parse(this.jsonmaterials)
+            return array
         },
     },
     methods: {

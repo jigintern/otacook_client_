@@ -1,8 +1,8 @@
 <template>
     <v-container>
-        <Usercard class="ma-4" />
-        <Skilltreecard class="ma-4"/>
-        <Ratecard class="ma-4" />
+        <Usercard :userid="userid" class="ma-4" />
+        <!--<Skilltreecard class="ma-4"/>-->
+        <Ratecard :userid="userid" class="ma-4" />
     </v-container>
 </template>
 
@@ -12,6 +12,9 @@ import Skilltreecard from '..//components/Skilltreecard'
 import Ratecard from '..//components/Ratecard'
 
 export default {
+    props:{
+        userid: Number
+    },
     components: {
         Usercard,
         Skilltreecard,

@@ -46,6 +46,7 @@ div(color="#F7F3E8")
 <script>
 import Recipe from '..//components/Recipe'
 import Materials from '..//components/Materials'
+import Cookies from 'js-cookie'
 import axios from 'axios'
 
 export default{
@@ -55,10 +56,11 @@ export default{
   },
   data: function(){
     return{
-      time: "7:00 ~ 8:00",
-      resipetitle:'冷やしキムチラーメン',
+      time: "7",
+      resipetitle:'',
       total_member: 1,
       uploadFile: null,
+      url: "https://imgfp.hotp.jp/IMGH/21/64/P028842164/P028842164_480.jpg",
       name: "",
       outline: "",
       error: "",
@@ -76,6 +78,25 @@ export default{
   created: function(){
     //useridをサーバーに送って投票状況を確認する？
   },
+  computed: {
+        contestid: function(){
+            var contestid = Cookies.get('contestid')
+            return contestid
+        }
+  },
+  mounted: function(){
+    let self = this
+    //情報取得
+    axios.get('http://localhost:8080/api/contest/info/'+String(self.contestid))
+    .then(function (response) {
+        var data = response.data
+        console.log(data["title"])
+        console.log(data["time"])
+        console.log(data["votetime"])
+        self.resipetitle = data["title"]
+        self.time = data["time"]
+    })
+  },
   methods: {
     selectfile :function(e){
       console.log(e)
@@ -83,23 +104,21 @@ export default{
       this.uploadFile = file
     },
     toquestion: function(){
-      if(this.name=="" || this.outline==""){
+      let self = this
+      if(this.name=="" || this.outline=="" || this.url==""){
         this.error="すべての項目を入力してから送信してください！"
       }else{
         this.error = ""
-        const params = new URLSearchParams()
-        params.append('qi', 1)
-        params.append('ui', 3)
-        params.append('cn', this.name)
-        params.append('co', this.outline)
-        axios.post('http://localhost:8080/answer/insert', params)
-          .catch(error => {
-            this.error = "送信に失敗しました"
-            window.alert("送信に失敗しました")
-          })
-          .then(Response => {
-            this.$router.push('/')
-          })  
+        axios.post('http://localhost:8080/api/contest/send',{   
+            userid:this.userid,
+            contestid:this.contestid,
+            title: this.name,
+            comment: this.outline,
+            url: this.url
+        })
+      .then(function (response) {
+        self.$router.push("/questionpage")
+      })
       }
     },
     tologin: function(){

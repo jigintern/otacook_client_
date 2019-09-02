@@ -25,6 +25,8 @@ div(color="#F7F3E8")
 
 <script>
 import Contestresultcard from '..//components/Contestresultcard'
+import Cookies from 'js-cookie'
+import axios from 'axios'
 
 export default{
     components: {
@@ -32,17 +34,46 @@ export default{
     },
     data: function(){
         return{
-            date: "2019/8/24",
-            time: "7:00 ~ 8:00",
-            recipetitle:'冷やしキムチラーメン',
-            ranking: [
-                { rank: 1, title: "タピオカミルクティー風カレーライスの南蛮漬け", name: "ぴ", icon: "https://vuetifyjs.com/apple-touch-icon-180x180.png", img: "https://imgfp.hotp.jp/IMGH/21/64/P028842164/P028842164_480.jpg", comment: "タピオカミルクティーの風味が効いていてとても美味しいです。"},
-                { rank: 2, title: "タピオカミルクティー風カレーライスの南蛮漬け", name: "ぴ", icon: "https://vuetifyjs.com/apple-touch-icon-180x180.png", img: "https://imgfp.hotp.jp/IMGH/21/64/P028842164/P028842164_480.jpg", comment: "タピオカミルクティーの風味が効いていてとても美味しいです。"},
-                { rank: 3, title: "タピオカミルクティー風カレーライスの南蛮漬け", name: "ぴ", icon: "https://vuetifyjs.com/apple-touch-icon-180x180.png", img: "https://imgfp.hotp.jp/IMGH/21/64/P028842164/P028842164_480.jpg", comment: "タピオカミルクティーの風味が効いていてとても美味しいです。"},
-                { rank: 4, title: "タピオカミルクティー風カレーライスの南蛮漬け", name: "ぴ", icon: "https://vuetifyjs.com/apple-touch-icon-180x180.png", img: "https://imgfp.hotp.jp/IMGH/21/64/P028842164/P028842164_480.jpg", comment: "タピオカミルクティーの風味が効いていてとても美味しいです。"},
-                { rank: 5, title: "タピオカミルクティー風カレーライスの南蛮漬け", name: "ぴ", icon: "https://vuetifyjs.com/apple-touch-icon-180x180.png", img: "https://imgfp.hotp.jp/IMGH/21/64/P028842164/P028842164_480.jpg", comment: "タピオカミルクティーの風味が効いていてとても美味しいです。"},
-            ]
+            date: "",
+            time: "",
+            recipetitle:'',
+            jsonmember: [],
+            ranking: "",
+            //ranking: [
+            //    { rank: 1, title: "タピオカミルクティー風カレーライスの南蛮漬け", name: "ぴ", icon: "https://vuetifyjs.com/apple-touch-icon-180x180.png", img: "https://imgfp.hotp.jp/IMGH/21/64/P028842164/P028842164_480.jpg", comment: "タピオカミルクティーの風味が効いていてとても美味しいです。"},
+            //    { rank: 2, title: "タピオカミルクティー風カレーライスの南蛮漬け", name: "ぴ", icon: "https://vuetifyjs.com/apple-touch-icon-180x180.png", img: "https://imgfp.hotp.jp/IMGH/21/64/P028842164/P028842164_480.jpg", comment: "タピオカミルクティーの風味が効いていてとても美味しいです。"},
+            //    { rank: 3, title: "タピオカミルクティー風カレーライスの南蛮漬け", name: "ぴ", icon: "https://vuetifyjs.com/apple-touch-icon-180x180.png", img: "https://imgfp.hotp.jp/IMGH/21/64/P028842164/P028842164_480.jpg", comment: "タピオカミルクティーの風味が効いていてとても美味しいです。"},
+            //    { rank: 4, title: "タピオカミルクティー風カレーライスの南蛮漬け", name: "ぴ", icon: "https://vuetifyjs.com/apple-touch-icon-180x180.png", img: "https://imgfp.hotp.jp/IMGH/21/64/P028842164/P028842164_480.jpg", comment: "タピオカミルクティーの風味が効いていてとても美味しいです。"},
+            //    { rank: 5, title: "タピオカミルクティー風カレーライスの南蛮漬け", name: "ぴ", icon: "https://vuetifyjs.com/apple-touch-icon-180x180.png", img: "https://imgfp.hotp.jp/IMGH/21/64/P028842164/P028842164_480.jpg", comment: "タピオカミルクティーの風味が効いていてとても美味しいです。"},
+            //]
         }
+    },
+    props:{
+        userid: Number
+    },
+    mounted: function(){
+        let self = this
+        axios.get('http://localhost:8080/api/contest/rankingmemberlistfromuser/'+String(this.userid))
+        .then(function (response) {
+            console.log(response.data)
+            self.jsonmember = "[" + response.data + "]"
+            var array = JSON.parse(self.jsonmember)
+            self.ranking = array
+        })
+
+        axios.get('http://localhost:8080/api/contest/info/'+String(self.contestid))
+        .then(function (response) {
+            var data = response.data
+            self.recipetitle = data["title"]
+            self.date = data["date"]
+            self.time = data["time"]
+        })
+    },
+    computed: {
+        contestid: function(){
+            var contestid = Cookies.get('contestid')
+            return contestid
+        },
     },
     methods: {
         totop: function(){
