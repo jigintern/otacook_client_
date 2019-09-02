@@ -70,10 +70,11 @@ export default {
           console.log(response.data);
           if(response.data == "-1"){
             self.Appsessionid = -1
-            self.AppisLoggingin = false
+            self.AppisLoggingin = 
+            Cookies.set('sessionid', -1);
           }else{
             var data = response.data
-            console.log(response.data)
+            //console.log(response.data)
             self.Appuserid = Number(response.data)
             self.AppisLoggingin = true
           }

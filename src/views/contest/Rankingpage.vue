@@ -20,7 +20,11 @@ div(color="#F7F3E8")
                     :isnameshow="true"
                 )
             .text-center.pt-10.pb-12
-                v-btn.title(color="#FFB618" @click="totop") トップページへ
+                div.red--text.mb-4 {{error}}
+                div(v-if="isloggingin == false")
+                    v-btn.title(color="#FFB618" @click="tologin") ログイン
+                div(v-else)
+                    v-btn.title(color="#FFB618" @click="totop") トップページへ
 </template>
 
 <script>
@@ -34,11 +38,13 @@ export default{
     },
     data: function(){
         return{
+            error: "",
             date: "",
             time: "",
             recipetitle:'',
             jsonmember: [],
             ranking: "",
+            isloggingin: false,
             //ranking: [
             //    { rank: 1, title: "タピオカミルクティー風カレーライスの南蛮漬け", name: "ぴ", icon: "https://vuetifyjs.com/apple-touch-icon-180x180.png", img: "https://imgfp.hotp.jp/IMGH/21/64/P028842164/P028842164_480.jpg", comment: "タピオカミルクティーの風味が効いていてとても美味しいです。"},
             //    { rank: 2, title: "タピオカミルクティー風カレーライスの南蛮漬け", name: "ぴ", icon: "https://vuetifyjs.com/apple-touch-icon-180x180.png", img: "https://imgfp.hotp.jp/IMGH/21/64/P028842164/P028842164_480.jpg", comment: "タピオカミルクティーの風味が効いていてとても美味しいです。"},
@@ -53,21 +59,32 @@ export default{
     },
     mounted: function(){
         let self = this
-        axios.get('http://localhost:8080/api/contest/rankingmemberlistfromuser/'+String(this.userid))
-        .then(function (response) {
-            console.log(response.data)
-            self.jsonmember = "[" + response.data + "]"
-            var array = JSON.parse(self.jsonmember)
-            self.ranking = array
-        })
+        const sessionid = Cookies.get('sessionid')
 
-        axios.get('http://localhost:8080/api/contest/info/'+String(self.contestid))
-        .then(function (response) {
-            var data = response.data
-            self.recipetitle = data["title"]
-            self.date = data["date"]
-            self.time = data["time"]
-        })
+        if(sessionid == -1){
+            this.isloggingin = false
+            self.error = "ログインしてください"
+        }else{
+            axios.get('http://localhost:8080/api/contest/info/'+String(self.contestid))
+            .then(function (response) {
+                var data = response.data
+                self.recipetitle = data["title"]
+                self.date = data["date"]
+                self.time = data["time"]
+            })
+
+            this.isloggingin = true
+            axios.get('http://localhost:8080/api/contest/rankingmemberlistfromuser/'+String(this.userid))
+            .then(function (response) {
+                console.log(response.data)
+                self.jsonmember = "[" + response.data + "]"
+                var array = JSON.parse(self.jsonmember)
+                self.ranking = array
+            })
+            .catch(function(){
+                self.error = "コンテストに参加していません"
+            })
+        }
     },
     computed: {
         contestid: function(){
@@ -77,7 +94,10 @@ export default{
     },
     methods: {
         totop: function(){
-        this.$router.push("/")
+            this.$router.push("/")
+        },
+        tologin: function(){
+            this.$router.push("/signin")
         },
     }
     }

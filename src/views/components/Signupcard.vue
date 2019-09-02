@@ -65,7 +65,7 @@ export default {
                 .then(function (response) {
                     console.log(response.data);
                     if(response.data == "-1"){
-                        self.errors = "登録済みです"
+                        self.error = "登録済みのメールアドレスです"
                     }else{
                         //var data = JSON.parse(response.data)
                         var data = response.data
