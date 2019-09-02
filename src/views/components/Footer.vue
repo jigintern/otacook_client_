@@ -1,6 +1,6 @@
 <template lang="pug">
 div
-    v-footer
+    v-footer(color="gray")
         v-col
         strong otacook.com
 </template>
