@@ -225,18 +225,22 @@ def startvote():
             print(text)
             count = 0
             text = "{"
+
+            if((int(len(useridlist))-count3) < 4):
+                break
         
-        if((int(len(useridlist))-count3) < 4):
+        '''if((int(len(useridlist))-count3) < 4):
             if(int(len(useridlist))%5 != 0):
-                #print("五人以下")
-                #print(int(len(useridlist))-count3)
+                print("五人以下")
+                print(int(len(useridlist))-count3)
                 if (int(len(useridlist))-count3) == 0:
+                    break
                     text += "\"total\":\"0\""
                     text += "}"
                     print(text)
                     f = open(path, "w")
                     f.write(text)
-                    f.close()
+                    f.close()'''
 
     path = "contests/now"
     f = open(path ,'r')
