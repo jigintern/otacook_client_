@@ -82,7 +82,7 @@ export default{
                 self.ranking = array
             })
             .catch(function(){
-                self.error = "コンテストに参加していません"
+                self.error = "コンテストに参加していないかマッチング可能人数に達していなかったため表示できません"
             })
         }
     },
