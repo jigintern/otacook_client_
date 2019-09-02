@@ -5,7 +5,7 @@ div(color="#F7F3E8")
       //料理の名前を入れる##
       div.headline.ml-2.mb-1 {{ time }}
       div.display-1.ml-4.font-weight-bold お題: {{ title }}
-      div.body-2.mr-4.text-right {{ total_member }}人が参加しています
+      div.body-2.mr-4.text-right {{ total_member }}人が解答済みです
       .text-right.ma-4
         v-btn.title(
           color="#FFB618"
@@ -51,7 +51,7 @@ export default{
     return{
       time: "",
       title:'',
-      total_member: 1,
+      total_member: 'n',
       jsonmaterials: '[]',
       jsonrecipes: '[]',
       status: 0,
@@ -110,6 +110,12 @@ export default{
     .then(function (response) {
         self.jsonmaterials = "[" + response.data + "]"
     })
+
+    axios.get('http://localhost:8080/api/contest/getentryusertotal')
+    .then(function (response) {
+        self.total_member = response.data
+    })
+
 
     //レシピリスト
     axios.get('http://localhost:8080/api/contest/recipesinfo/'+String(self.contestid))

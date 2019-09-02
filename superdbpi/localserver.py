@@ -142,6 +142,11 @@ def getrandomgroopid():
     returndata = database.getrandomgroopid()
     return returndata
 
+@app.route('/api/contest/getentryusertotal', methods=['GET'])
+def getentryusertotal():
+    returndata = database.getentryusertotal()
+    return returndata
+
 
 @app.route('/api/admin/contest/vote', methods=['GET'])
 def adstartvote():

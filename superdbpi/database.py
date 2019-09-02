@@ -502,6 +502,20 @@ def getrankingmemberlistfromuser(userid):
 
     return text
 
+def getentryusertotal():
+    path = "contests/now"
+    f = open(path ,'r')
+    jsondata = json.load(f)
+    f.close()
+    contestid = jsondata["contestid"]
+
+    filelist = glob.glob("./contests/entry/"+str(contestid)+"/*")
+    total = str(len(filelist))
+    print(total)
+    return total
+
+#getentryusertotal()
+
 #getrankingmemberlistfromuser(107089007957609)
 
 #vote(35327020981809, 1, 2, 3)
