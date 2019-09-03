@@ -88,7 +88,7 @@ export default{
   mounted: function(){
     let self = this
     //情報取得
-    axios.get('https://t1.intern.jigd.info/flask/api/contest/info/'+String(self.contestid))
+    axios.get('http://localhost:8080/api/contest/info/'+String(self.contestid))
     .then(function (response) {
         var data = response.data
         console.log(data["title"])
@@ -141,7 +141,7 @@ export default{
     toquestion2: function(){
       this.error = ""
       let self = this
-      axios.post('https://t1.intern.jigd.info/flask/api/contest/send',{   
+      axios.post('http://localhost:8080/api/contest/send',{   
           userid:this.userid,
           contestid:this.contestid,
           title: this.name,

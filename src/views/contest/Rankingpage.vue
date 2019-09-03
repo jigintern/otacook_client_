@@ -65,7 +65,7 @@ export default{
             this.isloggingin = false
             self.error = "ログインしてください"
         }else{
-            axios.get('https://t1.intern.jigd.info/flask/api/contest/info/'+String(self.contestid))
+            axios.get('http://localhost:8080/api/contest/info/'+String(self.contestid))
             .then(function (response) {
                 var data = response.data
                 self.recipetitle = data["title"]
@@ -74,7 +74,7 @@ export default{
             })
 
             this.isloggingin = true
-            axios.get('https://t1.intern.jigd.info/flask/api/contest/rankingmemberlistfromuser/'+String(this.userid))
+            axios.get('http://localhost:8080/api/contest/rankingmemberlistfromuser/'+String(this.userid))
             .then(function (response) {
                 console.log(response.data)
                 self.jsonmember = "[" + response.data + "]"

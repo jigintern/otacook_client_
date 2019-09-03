@@ -59,7 +59,7 @@ export default {
                 //ここでメールアドレスとパスワードをサーバーに送って
                 //sessionidとuseridを取得する
                 //data="email="+this.email+"&pass"
-                axios.post('https://t1.intern.jigd.info/flask/api/login',{
+                axios.post('http://localhost:8080/api/login',{
                     email:this.email,
                     password:this.password
                 })
