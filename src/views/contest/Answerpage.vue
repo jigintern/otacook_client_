@@ -88,7 +88,7 @@ export default{
   mounted: function(){
     let self = this
     //情報取得
-    axios.get('http://localhost:8080/api/contest/info/'+String(self.contestid))
+    axios.get('https://t1.intern.jigd.info/flask/api/contest/info/'+String(self.contestid))
     .then(function (response) {
         var data = response.data
         console.log(data["title"])
@@ -100,7 +100,10 @@ export default{
   },
   methods: {
     changefile :function(e){
-      this.file = this.$refs.file;
+      console.log(e, e.target)
+      //this.file = this.$refs.file
+      this.file = e
+      //console.log(this.file)
     },
     toquestion: function(){
       let self = this
@@ -109,7 +112,8 @@ export default{
       }else{
         let formData = new FormData();
         formData.append('file', this.file);
-        axios.post( 'https://t1.intern.jigd.info/imgs/upload.php',
+        console.log(this.file)
+        axios.post( 'https://t1.intern.jigd.info/up.php',
         formData,
         {
           headers: {
@@ -118,8 +122,11 @@ export default{
         }
         ).then(function(e){
           console.log('SUCCESS!!');
-          if(e.data != "-1"){
-            self.error="写真を選択して下さい"
+          console.log(e.data)
+          if(e.data == "-1"){
+            self.error="写真を選択してください"
+          }else if(e.data == "-2"){
+            self.error="ファイルが選択されていません"
           }else{
             self.url = e.data
             self.toquestion2()
@@ -134,7 +141,7 @@ export default{
     toquestion2: function(){
       this.error = ""
       let self = this
-      axios.post('http://localhost:8080/api/contest/send',{   
+      axios.post('https://t1.intern.jigd.info/flask/api/contest/send',{   
           userid:this.userid,
           contestid:this.contestid,
           title: this.name,

@@ -10,7 +10,7 @@ def createsession(userid):
         if not os.path.exists(path):
             isok = True
 
-    f = open(path, "w")
+    f = open(path, "w",encoding="utf-8_sig")
     f.write("{\"userid\": \""+str(userid)+"\"}")
     f.close()
     return sessionid
@@ -18,7 +18,7 @@ def createsession(userid):
 def checksession(sessionid):
     path = "users/sessionindex/"+str(sessionid)
     if os.path.exists(path):
-        f = open(path ,'r')
+        f = open(path ,'r',encoding="utf-8_sig")
         jsondata = json.load(f)
         f.close()
         userid = str(jsondata["userid"])
@@ -39,7 +39,7 @@ def deletesession(sessionid):
 #ログイン処理
 def login(email, password):
 
-    f = open("users/maillist" ,'r')
+    f = open("users/maillist" ,'r',encoding="utf-8_sig")
     jsondata = json.load(f)
     f.close()
 
@@ -51,7 +51,7 @@ def login(email, password):
 
     try:
         path = "users/idindex/"+str(userid)
-        f = open(path ,'r')
+        f = open(path ,'r',encoding="utf-8_sig")
         jsondata = json.load(f)
         f.close()
         dbpassword = jsondata["password"]
@@ -80,7 +80,7 @@ def createuser(username, email, password):
             isok = True
 
     #メールアドレスリストをチェックして未登録ならユーザー情報を保存する
-    f = open("users/maillist" ,'r')
+    f = open("users/maillist" ,'r',encoding="utf-8_sig")
     jsondata = json.load(f)
     f.close()
     try:
@@ -94,11 +94,11 @@ def createuser(username, email, password):
 
         writejsondata = json.dumps(jsondata)
         writejsondata = json.loads(writejsondata)
-        f2 = open("users/maillist", "w")
+        f2 = open("users/maillist", "w",encoding="utf-8_sig")
         json.dump(writejsondata, f2)
         f2.close()
             
-        f = open(path, "w")
+        f = open(path, "w",encoding="utf-8_sig")
         f.write("{\"userid\": \""+str(userid)+"\", \"username\": \""+str(username)+"\", \"email\": \""+str(email)+"\", \"password\": \""+str(password)+"\", \"rate\": \""+str(rate)+"\"}")
         f.close()
         sessionid = createsession(userid)
@@ -110,7 +110,7 @@ def createuser(username, email, password):
 #ユーザー名メールレートの基本データを返す
 def getuserinfo(userid):
     path = "users/idindex/"+str(userid)
-    f = open(path ,'r')
+    f = open(path ,'r',encoding="utf-8_sig")
     jsondata = json.load(f)
     f.close()
 
@@ -121,7 +121,7 @@ def getuserinfo(userid):
 #実行中のコンテストのIDとステータスを渡す
 def nowcontestinfo():
     path = "contests/now"
-    f = open(path ,'r')
+    f = open(path ,'r',encoding="utf-8_sig")
     jsondata = json.load(f)
     f.close()
     print(jsondata)
@@ -157,7 +157,7 @@ def contestrecipesinfo(contestid):
 #コンテストの結果を保存する
 def savecontestanswer(contestid, userid, title, comment, url):
     path = "contests/entry/"+str(contestid)+"/"+str(userid)
-    f = open(path, "w")
+    f = open(path, "w",encoding="utf-8_sig")
     f.write("{\"contestid\": \""+str(contestid)+"\", \"userid\": \""+str(userid)+"\", \"title\": \""+str(title)+"\", \"comment\": \""+str(comment)+"\", \"url\": \""+str(url)+"\"}")
     f.close()
     return "0"
@@ -165,7 +165,7 @@ def savecontestanswer(contestid, userid, title, comment, url):
 #コンテストを投票モードに移行
 def startvote():
     path = "contests/now"
-    f = open(path ,'r')
+    f = open(path ,'r',encoding="utf-8_sig")
     jsondata = json.load(f)
     f.close()
     contestid = jsondata["contestid"]
@@ -177,7 +177,7 @@ def startvote():
         userid = i.split("\\")[1]
         #print(userid)
 
-        f = open("users/idindex/"+str(userid) ,'r')
+        f = open("users/idindex/"+str(userid) ,'r',encoding="utf-8_sig")
         jsondata = json.load(f)
         f.close()
 
@@ -212,14 +212,14 @@ def startvote():
                 if not os.path.exists(path):
                     isok = True
         #groopidとuseridの紐づけ
-        f = open("contests/groopindexfromid/"+str(contestid)+"/"+str(i), "w")
+        f = open("contests/groopindexfromid/"+str(contestid)+"/"+str(i), "w",encoding="utf-8_sig")
         f.write("{\"groopid\":\""+str(groopid)+"\"}")
         f.close()
         
         if count%5 == 0:
             text += "\"total\":\"0\""
             text += "}"
-            f = open(path, "w")
+            f = open(path, "w",encoding="utf-8_sig")
             f.write(text)
             f.close()
             print(text)
@@ -238,32 +238,32 @@ def startvote():
                     text += "\"total\":\"0\""
                     text += "}"
                     print(text)
-                    f = open(path, "w")
+                    f = open(path, "w",encoding="utf-8_sig")
                     f.write(text)
                     f.close()'''
 
     path = "contests/now"
-    f = open(path ,'r')
+    f = open(path ,'r',encoding="utf-8_sig")
     jsondata = json.load(f)
     f.close()
     jsondata["status"] = "2"
     writejsondata = json.dumps(jsondata)
     writejsondata = json.loads(writejsondata)
-    f2 = open(path, "w")
+    f2 = open(path, "w",encoding="utf-8_sig")
     json.dump(writejsondata, f2)
     f2.close()
 
 #コンテストを結果モードに移行
 def startresult():
     path = "contests/now"
-    f = open(path ,'r')
+    f = open(path ,'r',encoding="utf-8_sig")
     jsondata = json.load(f)
     f.close()
     contestid = jsondata["contestid"]
     jsondata["status"] = "3"
     writejsondata = json.dumps(jsondata)
     writejsondata = json.loads(writejsondata)
-    f2 = open(path, "w")
+    f2 = open(path, "w",encoding="utf-8_sig")
     json.dump(writejsondata, f2)
     f2.close()
 
@@ -271,7 +271,7 @@ def startresult():
     length = int(len(grooplist))
     for i in range(length):
         path = "contests/groops/"+str(contestid)+"/"+str(grooplist[i].split("\\")[1])
-        f = open(path ,'r')
+        f = open(path ,'r',encoding="utf-8_sig")
         jsondata = json.load(f)
         f.close()
         totallist = []
@@ -294,7 +294,7 @@ def startresult():
 
         for i in range(5):
             path = "users/idindex/"+str(idlist[i])
-            f = open(path ,'r')
+            f = open(path ,'r',encoding="utf-8_sig")
             jsondata = json.load(f)
             f.close()
             rate = int(jsondata["rate"])
@@ -311,7 +311,7 @@ def startresult():
             jsondata["rate"] = str(rate)
             writejsondata = json.dumps(jsondata)
             writejsondata = json.loads(writejsondata)
-            f2 = open(path, "w")
+            f2 = open(path, "w",encoding="utf-8_sig")
             json.dump(writejsondata, f2)
             f2.close()
 
@@ -319,13 +319,13 @@ def startresult():
             
 def vote(groopid, no1, no2, no3):
     path = "contests/now"
-    f = open(path ,'r')
+    f = open(path ,'r',encoding="utf-8_sig")
     jsondata = json.load(f)
     f.close()
     contestid = jsondata["contestid"]
 
     path = "contests/groops/"+str(contestid)+"/"+str(groopid)
-    f = open(path ,'r')
+    f = open(path ,'r',encoding="utf-8_sig")
     jsondata = json.load(f)
     f.close()
     total = int(jsondata["total"])
@@ -346,7 +346,7 @@ def vote(groopid, no1, no2, no3):
 
     writejsondata = json.dumps(jsondata)
     writejsondata = json.loads(writejsondata)
-    f2 = open(path, "w")
+    f2 = open(path, "w",encoding="utf-8_sig")
     json.dump(writejsondata, f2)
     f2.close()
 
@@ -354,7 +354,7 @@ def vote(groopid, no1, no2, no3):
 
 def getrandomgroopid():
     path = "contests/now"
-    f = open(path ,'r')
+    f = open(path ,'r',encoding="utf-8_sig")
     jsondata = json.load(f)
     f.close()
     contestid = jsondata["contestid"]
@@ -369,21 +369,21 @@ def getrandomgroopid():
 
 def getmemberlistfromuser(userid):
     path = "contests/now"
-    f = open(path ,'r')
+    f = open(path ,'r',encoding="utf-8_sig")
     jsondata = json.load(f)
     f.close()
     contestid = jsondata["contestid"]
     print(contestid)
 
     path = "contests/groopindexfromid/"+str(contestid)+"/"+str(userid)
-    f = open(path ,'r')
+    f = open(path ,'r',encoding="utf-8_sig")
     jsondata = json.load(f)
     f.close()
     groopid = jsondata["groopid"]
     print(groopid)
 
     path = "contests/groops/"+str(contestid)+"/"+str(groopid)
-    f = open(path ,'r')
+    f = open(path ,'r',encoding="utf-8_sig")
     jsondata = json.load(f)
     f.close()
     idlist = []
@@ -397,11 +397,11 @@ def getmemberlistfromuser(userid):
     text = ""
     for i in range(5):
         path = "contests/entry/"+str(contestid)+"/"+str(idlist[i])
-        f = open(path ,'r')
+        f = open(path ,'r',encoding="utf-8_sig")
         jsondata = json.load(f)
         f.close()
         path = "users/idindex/"+str(idlist[i])
-        f = open(path ,'r')
+        f = open(path ,'r',encoding="utf-8_sig")
         ujsondata = json.load(f)
         f.close()
         text += "{\"number\":\""+str(i+1)+"\", \"title\":\""+str(jsondata["title"])+"\", \"name\":\""+str(ujsondata["username"])+"\", \"icon\":\"https://vuetifyjs.com/apple-touch-icon-180x180.png\", \"img\":\""+str(jsondata["url"])+"\", \"comment\":\""+str(jsondata["comment"])+"\"}"
@@ -411,16 +411,17 @@ def getmemberlistfromuser(userid):
 
     return text
 
+#ユーザーリストをグループIDから取得
 def getmemberlistfromgroop(groopid):
     path = "contests/now"
-    f = open(path ,'r')
+    f = open(path ,'r',encoding="utf-8_sig")
     jsondata = json.load(f)
     f.close()
     contestid = jsondata["contestid"]
     print(contestid)
 
     path = "contests/groops/"+str(contestid)+"/"+str(groopid)
-    f = open(path ,'r')
+    f = open(path ,'r',encoding="utf-8_sig")
     jsondata = json.load(f)
     f.close()
     idlist = []
@@ -434,11 +435,11 @@ def getmemberlistfromgroop(groopid):
     text = ""
     for i in range(5):
         path = "contests/entry/"+str(contestid)+"/"+str(idlist[i])
-        f = open(path ,'r')
+        f = open(path ,'r',encoding="utf-8_sig")
         jsondata = json.load(f)
         f.close()
         path = "users/idindex/"+str(idlist[i])
-        f = open(path ,'r')
+        f = open(path ,'r',encoding="utf-8_sig")
         ujsondata = json.load(f)
         f.close()
         text += "{\"number\":\""+str(i+1)+"\", \"title\":\""+str(jsondata["title"])+"\", \"name\":\""+str(ujsondata["username"])+"\", \"icon\":\"https://vuetifyjs.com/apple-touch-icon-180x180.png\", \"img\":\""+str(jsondata["url"])+"\", \"comment\":\""+str(jsondata["comment"])+"\"}"
@@ -451,21 +452,21 @@ def getmemberlistfromgroop(groopid):
 
 def getrankingmemberlistfromuser(userid):
     path = "contests/now"
-    f = open(path ,'r')
+    f = open(path ,'r',encoding="utf-8_sig")
     jsondata = json.load(f)
     f.close()
     contestid = jsondata["contestid"]
     print(contestid)
 
     path = "contests/groopindexfromid/"+str(contestid)+"/"+str(userid)
-    f = open(path ,'r')
+    f = open(path ,'r',encoding="utf-8_sig")
     jsondata = json.load(f)
     f.close()
     groopid = jsondata["groopid"]
     print(groopid)
 
     path = "contests/groops/"+str(contestid)+"/"+str(groopid)
-    f = open(path ,'r')
+    f = open(path ,'r',encoding="utf-8_sig")
     jsondata = json.load(f)
     f.close()
     totallist = []
@@ -492,11 +493,11 @@ def getrankingmemberlistfromuser(userid):
     text = ""
     for i in range(5):
         path = "contests/entry/"+str(contestid)+"/"+str(idlist[i])
-        f = open(path ,'r')
+        f = open(path ,'r',encoding="utf-8_sig")
         jsondata = json.load(f)
         f.close()
         path = "users/idindex/"+str(idlist[i])
-        f = open(path ,'r')
+        f = open(path ,'r',encoding="utf-8_sig")
         ujsondata = json.load(f)
         f.close()
         text += "{\"rank\":\""+str(i+1)+"\", \"title\":\""+str(jsondata["title"])+"\", \"name\":\""+str(ujsondata["username"])+"\", \"icon\":\"https://vuetifyjs.com/apple-touch-icon-180x180.png\", \"img\":\""+str(jsondata["url"])+"\", \"comment\":\""+str(jsondata["comment"])+"\"}"
@@ -508,7 +509,7 @@ def getrankingmemberlistfromuser(userid):
 
 def getentryusertotal():
     path = "contests/now"
-    f = open(path ,'r')
+    f = open(path ,'r',encoding="utf-8_sig")
     jsondata = json.load(f)
     f.close()
     contestid = jsondata["contestid"]

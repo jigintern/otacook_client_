@@ -57,7 +57,7 @@ export default {
                 //会員登録をサーバーで処理して
                 //sessionid, useridを取得する
                 let self = this
-                axios.post('http://localhost:8080/api/signup',{
+                axios.post('https://t1.intern.jigd.info/flask/api/signup',{
                     email: this.email,
                     password: this.password,
                     username: this.username
