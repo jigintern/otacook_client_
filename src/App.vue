@@ -63,7 +63,7 @@ export default {
       //ここでセッションIDをサーバーに送ってログイン状態を確認
       //true なら以下のプロパティをセット
       console.log(sessionid)
-      axios.post('http://localhost:8080/api/checksession',{
+      axios.post('https://t1.intern.jigd.info/flask/api/checksession',{
           sessionid:sessionid,
       })
       .then(function (response) {
@@ -94,7 +94,7 @@ export default {
     logout: function(){
       //セッションIDをサーバーに送る
       let self = this
-      axios.post('http://localhost:8080/api/logout',{
+      axios.post('https://t1.intern.jigd.info/flask/api/logout',{
           sessionid:this.Appsessionid
       })
       .then(function (response) {

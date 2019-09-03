@@ -35,7 +35,7 @@ export default {
     },
     mounted: function(){
         let self = this
-        axios.get('http://localhost:8080/api/contest/info/'+String(this.contestid))
+        axios.get('https://t1.intern.jigd.info/flask/api/contest/info/'+String(this.contestid))
         .then(function (response) {
             var data = response.data
             console.log(data["title"])
@@ -46,7 +46,7 @@ export default {
             self.votetime = data["votetime"]
         })
 
-        axios.get('http://localhost:8080/api/contest/materialsinfo/'+String(this.contestid))
+        axios.get('https://t1.intern.jigd.info/flask/api/contest/materialsinfo/'+String(this.contestid))
         .then(function (response) {
             self.jsonlist = "[" + response.data + "]"
         })

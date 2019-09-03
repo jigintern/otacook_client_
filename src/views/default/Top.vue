@@ -50,7 +50,7 @@ export default {
         let self = this
         //実行中のコンテストのIDを取得
         //実行中から結果発表までがnow
-        axios.get('http://localhost:8080/api/contest/now')
+        axios.get('https://t1.intern.jigd.info/flask/api/contest/now')
         .then(function (response) {
             var data = response.data
             console.log(data["contestid"])
