@@ -13,10 +13,6 @@ filepath = "datas/data.json"
 
 app = Flask(__name__)
 CORS(app)
-#app.logger.disabled = True
-
-#werkzeug_logger = logging.getLogger('werkzeug')
-#werkzeug_logger.disabled = True
 
 def allowed_file(filename):
     return '.' in filename and filename.rsplit('.', 1)[1] in ALLOWED_EXTENSIONS
