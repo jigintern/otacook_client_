@@ -80,7 +80,7 @@ export default{
   mounted: function(){
     let self = this
     //実行中のコンテストの状態を取得
-    axios.get('http://localhost:8080/api/contest/now')
+    axios.get('https://t1.intern.jigd.info/flask/api/contest/now')
     .then(function (response) {
       var data = response.data
       console.log(data["status"])
@@ -94,7 +94,7 @@ export default{
     })
 
     //情報取得
-    axios.get('http://localhost:8080/api/contest/info/'+String(self.contestid))
+    axios.get('https://t1.intern.jigd.info/flask/api/contest/info/'+String(self.contestid))
     .then(function (response) {
         var data = response.data
         console.log(data["title"])
@@ -106,19 +106,19 @@ export default{
     })
 
     //材料リスト
-    axios.get('http://localhost:8080/api/contest/materialsinfo/'+String(self.contestid))
+    axios.get('https://t1.intern.jigd.info/flask/api/contest/materialsinfo/'+String(self.contestid))
     .then(function (response) {
         self.jsonmaterials = "[" + response.data + "]"
     })
 
-    axios.get('http://localhost:8080/api/contest/getentryusertotal')
+    axios.get('https://t1.intern.jigd.info/flask/api/contest/getentryusertotal')
     .then(function (response) {
         self.total_member = response.data
     })
 
 
     //レシピリスト
-    axios.get('http://localhost:8080/api/contest/recipesinfo/'+String(self.contestid))
+    axios.get('https://t1.intern.jigd.info/flask/api/contest/recipesinfo/'+String(self.contestid))
     .then(function (response) {
         self.jsonrecipes = "[" + response.data + "]"
     })

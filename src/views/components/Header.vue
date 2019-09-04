@@ -4,8 +4,6 @@ div
         v-btn(text @click="totop").title オタクック
         v-divider.mx-4(vertical)
         .flex-grow-1
-        v-text-field(single-line hide-details)
-            v-icon mdi-anchor
         v-toolbar-items
             v-divider.mx-4(vertical)
             div(v-if="isLoggingin" class="my-auto")

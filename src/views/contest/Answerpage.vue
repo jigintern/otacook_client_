@@ -29,7 +29,8 @@ div(color="#F7F3E8")
         type="file"
       //)
       v-file-input.ma-8.mt-0(
-        @change="selectfile"
+        @change="changefile"
+        type="file" id="file" ref="file"
         accept="image/*"
         label="写真を選択してください！"
         )
@@ -52,18 +53,18 @@ import axios from 'axios'
 export default{
   components: {
     Recipe,
-    Materials
+    Materials,
   },
   data: function(){
     return{
       time: "7",
       resipetitle:'',
       total_member: 1,
-      uploadFile: null,
       url: "https://imgfp.hotp.jp/IMGH/21/64/P028842164/P028842164_480.jpg",
       name: "",
       outline: "",
       error: "",
+      file: "",
       rules: {
         required: value => !!value || '入力必須項目です。',
         namemax: v => v.length <= 30 || '30文字以内でオナシャス',
@@ -87,7 +88,7 @@ export default{
   mounted: function(){
     let self = this
     //情報取得
-    axios.get('http://localhost:8080/api/contest/info/'+String(self.contestid))
+    axios.get('https://t1.intern.jigd.info/flask/api/contest/info/'+String(self.contestid))
     .then(function (response) {
         var data = response.data
         console.log(data["title"])
@@ -98,28 +99,58 @@ export default{
     })
   },
   methods: {
-    selectfile :function(e){
-      console.log(e)
-      var file = e.data
-      this.uploadFile = file
+    changefile :function(e){
+      console.log(e, e.target)
+      //this.file = this.$refs.file
+      this.file = e
+      //console.log(this.file)
     },
     toquestion: function(){
       let self = this
-      if(this.name=="" || this.outline=="" || this.url==""){
+      if(this.name=="" || this.outline==""){
         this.error="すべての項目を入力してから送信してください！"
       }else{
-        this.error = ""
-        axios.post('http://localhost:8080/api/contest/send',{   
-            userid:this.userid,
-            contestid:this.contestid,
-            title: this.name,
-            comment: this.outline,
-            url: this.url
+        let formData = new FormData();
+        formData.append('file', this.file);
+        console.log(this.file)
+        axios.post( 'https://t1.intern.jigd.info/up.php',
+        formData,
+        {
+          headers: {
+              'Content-Type': 'multipart/form-data'
+          }
+        }
+        ).then(function(e){
+          console.log('SUCCESS!!');
+          console.log(e.data)
+          if(e.data == "-1"){
+            self.error="写真を選択してください"
+          }else if(e.data == "-2"){
+            self.error="ファイルが選択されていません"
+          }else{
+            self.url = e.data
+            self.toquestion2()
+          }
         })
+        .catch(function(){
+          console.log('FAILURE!!');
+          self.error="写真のアップロードに失敗しました"
+        });
+      }
+    },
+    toquestion2: function(){
+      this.error = ""
+      let self = this
+      axios.post('https://t1.intern.jigd.info/flask/api/contest/send',{   
+          userid:this.userid,
+          contestid:this.contestid,
+          title: this.name,
+          comment: this.outline,
+          url: this.url
+      })
       .then(function (response) {
         self.$router.push("/questionpage")
       })
-      }
     },
     tologin: function(){
       this.$router.push("/loginpage")

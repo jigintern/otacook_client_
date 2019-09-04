@@ -158,8 +158,6 @@ def adstartresult():
     database.startresult()
     return "結果モード"
 
-
-#コンテストマッチング関連
 def start():
     app.run(port=8080)
 
