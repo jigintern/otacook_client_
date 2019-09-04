@@ -1,7 +1,7 @@
 import json, os, random, glob
 
 #セッションの作成
-def createsession(userid):
+def create_session(userid):
     #sessionidを生成
     sessionid = random.randint(100,9999999999)
     isok = False
@@ -15,7 +15,7 @@ def createsession(userid):
     f.close()
     return sessionid
 
-def checksession(sessionid):
+def check_session(sessionid):
     path = "users/sessionindex/"+str(sessionid)
     if os.path.exists(path):
         f = open(path ,'r',encoding="utf-8_sig")
@@ -27,7 +27,7 @@ def checksession(sessionid):
     return userid
 
 #セッションの削除
-def deletesession(sessionid):
+def delete_session(sessionid):
     try:
         path = "users/sessionindex/"+str(sessionid)
         os.remove(path)
@@ -57,7 +57,7 @@ def login(email, password):
         dbpassword = jsondata["password"]
         if dbpassword == password:
             print("正しいパスワード")
-            sessionid = createsession(userid)
+            sessionid = create_session(userid)
             data = "{\"sessionid\":\""+str(sessionid)+"\",\"userid\":\""+str(userid)+"\"}"
             print(data)
             return data
@@ -69,7 +69,7 @@ def login(email, password):
         return -1
     
 #ユーザー登録関数
-def createuser(username, email, password):
+def create_user(username, email, password):
     #useridを生成
     userid = random.randint(100,999999999999999)
     isok = False
@@ -101,14 +101,14 @@ def createuser(username, email, password):
         f = open(path, "w",encoding="utf-8_sig")
         f.write("{\"userid\": \""+str(userid)+"\", \"username\": \""+str(username)+"\", \"email\": \""+str(email)+"\", \"password\": \""+str(password)+"\", \"rate\": \""+str(rate)+"\"}")
         f.close()
-        sessionid = createsession(userid)
+        sessionid = create_session(userid)
         data = "{\"sessionid\":\""+str(sessionid)+"\",\"userid\":\""+str(userid)+"\"}"
         print(sessionid)
         return data
 
 #ユーザー情報をとる関数
 #ユーザー名メールレートの基本データを返す
-def getuserinfo(userid):
+def get_userinfo(userid):
     path = "users/idindex/"+str(userid)
     f = open(path ,'r',encoding="utf-8_sig")
     jsondata = json.load(f)
@@ -119,7 +119,7 @@ def getuserinfo(userid):
     return text
 
 #実行中のコンテストのIDとステータスを渡す
-def nowcontestinfo():
+def now_contest_info():
     path = "contests/now"
     f = open(path ,'r',encoding="utf-8_sig")
     jsondata = json.load(f)
@@ -128,7 +128,7 @@ def nowcontestinfo():
     return jsondata
 
 #コンテストの情報を返す
-def contestinfo(contestid):
+def contest_info(contestid):
     path = "contests/info/"+str(contestid)
     f = open(path ,'r',encoding="utf-8_sig")
     jsondata = json.load(f)
@@ -137,7 +137,7 @@ def contestinfo(contestid):
     return jsondata
 
 #コンテストの材料を返す
-def contestmaterialsinfo(contestid):
+def contest_materials_info(contestid):
     path = "contests/materials/"+str(contestid)
     f = open(path ,'r',encoding="utf-8_sig")
     jsondata = f.read()
@@ -146,7 +146,7 @@ def contestmaterialsinfo(contestid):
     return jsondata
 
 #コンテストのレシピを返す
-def contestrecipesinfo(contestid):
+def contest_recipes_info(contestid):
     path = "contests/recipes/"+str(contestid)
     f = open(path ,'r',encoding="utf-8_sig")
     jsondata = f.read()
@@ -155,7 +155,7 @@ def contestrecipesinfo(contestid):
     return jsondata
 
 #コンテストの結果を保存する
-def savecontestanswer(contestid, userid, title, comment, url):
+def save_contest_answer(contestid, userid, title, comment, url):
     path = "contests/entry/"+str(contestid)+"/"+str(userid)
     f = open(path, "w",encoding="utf-8_sig")
     f.write("{\"contestid\": \""+str(contestid)+"\", \"userid\": \""+str(userid)+"\", \"title\": \""+str(title)+"\", \"comment\": \""+str(comment)+"\", \"url\": \""+str(url)+"\"}")
@@ -163,7 +163,7 @@ def savecontestanswer(contestid, userid, title, comment, url):
     return "0"
 
 #コンテストを投票モードに移行
-def startvote():
+def start_vote():
     path = "contests/now"
     f = open(path ,'r',encoding="utf-8_sig")
     jsondata = json.load(f)
@@ -254,7 +254,7 @@ def startvote():
     f2.close()
 
 #コンテストを結果モードに移行
-def startresult():
+def start_result():
     path = "contests/now"
     f = open(path ,'r',encoding="utf-8_sig")
     jsondata = json.load(f)
@@ -352,7 +352,7 @@ def vote(groopid, no1, no2, no3):
 
     return "0"
 
-def getrandomgroopid():
+def get_random_groopid():
     path = "contests/now"
     f = open(path ,'r',encoding="utf-8_sig")
     jsondata = json.load(f)
@@ -367,7 +367,7 @@ def getrandomgroopid():
     print(groopid)
     return groopid
 
-def getmemberlistfromuser(userid):
+def get_memberlist_from_user(userid):
     path = "contests/now"
     f = open(path ,'r',encoding="utf-8_sig")
     jsondata = json.load(f)
@@ -412,7 +412,7 @@ def getmemberlistfromuser(userid):
     return text
 
 #ユーザーリストをグループIDから取得
-def getmemberlistfromgroop(groopid):
+def get_memberlist_from_groopid(groopid):
     path = "contests/now"
     f = open(path ,'r',encoding="utf-8_sig")
     jsondata = json.load(f)
@@ -450,7 +450,7 @@ def getmemberlistfromgroop(groopid):
     return text
 
 
-def getrankingmemberlistfromuser(userid):
+def get_ranking_memberlist_from_user(userid):
     path = "contests/now"
     f = open(path ,'r',encoding="utf-8_sig")
     jsondata = json.load(f)
@@ -507,7 +507,7 @@ def getrankingmemberlistfromuser(userid):
 
     return text
 
-def getentryusertotal():
+def get_entry_user_total():
     path = "contests/now"
     f = open(path ,'r',encoding="utf-8_sig")
     jsondata = json.load(f)
@@ -519,18 +519,18 @@ def getentryusertotal():
     print(total)
     return total
 
-#getentryusertotal()
+#get_entry_user_total()
 
-#getrankingmemberlistfromuser(107089007957609)
+#get_ranking_memberlist_from_user(107089007957609)
 
 #vote(35327020981809, 1, 2, 3)
-#startvote()
-#nowcontestinfo()
-#contestinfo(1)
-#contestmaterialsinfo(1)
+#start_vote()
+#now_contest_info()
+#contest_info(1)
+#contest_materials_info(1)
 #contestresipesinfo(1)
 
-#getuserinfo(367823181502481)
-#createuser("おちんちん ", "otinntin@otinntinn.com", "otinntinn")
+#get_userinfo(367823181502481)
+#create_user("おちんちん ", "otinntin@otinntinn.com", "otinntinn")
 #login("ufuS","himitu")
-#deletesession(100769456888905161181693367)
+#delete_session(100769456888905161181693367)
