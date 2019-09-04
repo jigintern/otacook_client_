@@ -155,6 +155,6 @@ def adstart_result():
     return "結果モード"
 
 def start():
-    app.run(port=8080)
+    app.run(host='0.0.0.0', port=3031, ssl_context=('server.crt', 'server.key'))
 
 start()
