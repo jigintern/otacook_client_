@@ -31,12 +31,13 @@
         required
     ></v-checkbox>
     <div class="text-right mr-4 red--text"> {{error}} </div>
+    <div class="moji ma-4">会員の方は</div>
     <v-layout justify-space-around="">
         <v-layout class="tosignup">
-            <div class="moji ml-4">会員の方は</div>
+            <!-- <div class="moji ml-4">会員の方は</div> -->
             <v-btn class="ma-4" @click="tosignin">ログインページへ</v-btn>
         </v-layout>
-        <v-btn class="ma-4" @click="submit">サインアップ</v-btn>
+        <v-btn class="ma-4" @click="submit" color="#FFB618">サインアップ</v-btn>
     </v-layout>
 </form>
 </v-card>
@@ -57,7 +58,7 @@ export default {
                 //会員登録をサーバーで処理して
                 //sessionid, useridを取得する
                 let self = this
-                axios.post('https://t1.intern.jigd.info/flask/api/signup',{
+                axios.post('http://localhost:8080/api/signup',{
                     email: this.email,
                     password: this.password,
                     username: this.username
@@ -106,6 +107,7 @@ export default {
 <style scoped>
 .moji{
     position: relative;
-    top: 23px
+    top: 23px;
+    font-size: 10pt;
 }
 </style>

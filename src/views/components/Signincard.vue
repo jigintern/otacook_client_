@@ -19,12 +19,13 @@
         @click:append="passwordarea = !passwordarea"
     ></v-text-field>
     <div class="text-right mr-4 red--text"> {{errors}} </div>
+    <div class="moji ma-4">会員登録をされていない方</div>
     <v-layout justify-space-around="">
         <v-layout class="tosignup">
-            <div class="moji ml-4">会員登録をされていない方</div>
+            <!-- <div class="moji ml-4">会員登録をされていない方</div> -->
             <v-btn class="ma-4" @click="tosignup">サインアップページへ</v-btn>
         </v-layout>
-        <v-btn class="ma-4" @click="submit">ログイン</v-btn>
+        <v-btn class="ma-4" @click="submit" color="#FFB618">ログイン</v-btn>
     </v-layout>
 </form>
 </v-card>
@@ -59,7 +60,7 @@ export default {
                 //ここでメールアドレスとパスワードをサーバーに送って
                 //sessionidとuseridを取得する
                 //data="email="+this.email+"&pass"
-                axios.post('https://t1.intern.jigd.info/flask/api/login',{
+                axios.post('http://localhost:8080/api/login',{
                     email:this.email,
                     password:this.password
                 })
@@ -92,6 +93,7 @@ export default {
 <style scoped>
 .moji{
     position: relative;
-    top: 23px
+    top: 23px;
+    font-size: 10pt;
 }
 </style>

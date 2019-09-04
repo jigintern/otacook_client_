@@ -96,14 +96,14 @@ export default{
     },
     mounted: function(){
         let self = this
-        axios.get('https://t1.intern.jigd.info/flask/api/contest/getrandomgroopid')
+        axios.get('http://localhost:8080/api/contest/getrandomgroopid')
         .then(function (response) {
             console.log(response.data)
             self.groopid = Number(response.data)
             self.getlist()
         })
 
-        axios.get('https://t1.intern.jigd.info/flask/api/contest/info/'+String(self.contestid))
+        axios.get('http://localhost:8080/api/contest/info/'+String(self.contestid))
         .then(function (response) {
             var data = response.data
             //console.log(data["title"])
@@ -165,7 +165,7 @@ export default{
     methods: {
         getlist: function(){
             let self = this
-            axios.get('https://t1.intern.jigd.info/flask/api/contest/memberlistfromgroop/'+String(this.groopid))
+            axios.get('http://localhost:8080/api/contest/memberlistfromgroop/'+String(this.groopid))
             .then(function (response) {
                 console.log(response.data)
                 self.jsonmember = "[" + response.data + "]"
@@ -179,7 +179,7 @@ export default{
                 this.error = "選択していない項目があります"
             }else{
                 //サーバーに選択内容を送信する
-                axios.post('https://t1.intern.jigd.info/flask/api/contest/vote',{
+                axios.post('http://localhost:8080/api/contest/vote',{
                     groopid:this.groopid,
                     no1: this.no1,
                     no2: this.no2,

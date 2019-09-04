@@ -2,16 +2,16 @@
 div
     v-toolbar(color="#ffb618")
         v-btn(text @click="totop").title オタクック
-        v-divider.mx-4(vertical)
+        //v-divider.mx-4(vertical)
         .flex-grow-1
         v-toolbar-items
-            v-divider.mx-4(vertical)
+            //v-divider.mx-4(vertical)
             div(v-if="isLoggingin" class="my-auto")
-                v-btn(text @click="tomypage") MyPage
-                v-btn(text @click="tosignout") SignOut
+                v-btn(text @click="tomypage") My Page
+                v-btn(text @click="tosignout") Sign Out
             div(v-else class="my-auto")
-                v-btn(text @click="tosignin") SignIn
-                v-btn(text @click="tosignup") SignUp
+                v-btn(text @click="tosignin") Sign In
+                v-btn(text @click="tosignup") Sign Up
             //router-link(to="signin")
 </template>
 
