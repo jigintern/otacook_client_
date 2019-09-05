@@ -2,21 +2,21 @@
 <v-card>
 <form>
     <v-text-field
-        class="mx-4 pt-5"
+        class="mx-4 pt-5 font-logotype"
         v-model="username"
         :rules="[rules.required]"
         label="ユーザー名"
         required
     ></v-text-field>
     <v-text-field
-        class="mx-4"
+        class="mx-4 font-logotype"
         v-model="email"
         :rules="[rules.required]"
         label="ユーザーID"
         required
     ></v-text-field>
     <v-text-field
-        class="mx-4"
+        class="mx-4 font-logotype"
         v-model="password"
         :rules="[rules.required, rules.min]"
         :type="passwordarea ? 'text' : 'password'"
@@ -26,11 +26,11 @@
         @click:append="passwordarea = !passwordarea"
     ></v-text-field>
     <div class="text-right mr-4 red--text"> {{error}} </div>
-    <div class="moji ma-4">会員の方は</div>
+    <div class="font-harenosora moji ma-4">会員の方は</div>
     <v-layout justify-space-around="">
         <v-layout class="tosignup">
             <!-- <div class="moji ml-4">会員の方は</div> -->
-            <v-btn class="ma-4" @click="tosignin">ログインページへ</v-btn>
+            <v-btn class="ma-4" @click="tosignin">サインインページへ</v-btn>
         </v-layout>
         <v-btn class="ma-4" @click="submit" color="#FFB618">サインアップ</v-btn>
     </v-layout>
@@ -104,5 +104,22 @@ export default {
     position: relative;
     top: 23px;
     font-size: 10pt;
+}
+
+@font-face {
+    font-family: 'LogoType';
+    src: url('../../fonts/07LogoTypeGothic7.ttf') format('TrueType');
+}
+
+@font-face {
+    font-family: 'Harenosora';
+    src: url('../../fonts/Harenosora.otf') format('OpenType');
+}
+
+.font-logotype{
+    font-family: 'LogoType';
+}
+.font-harenosora{
+    font-family: 'Harenosora';
 }
 </style>

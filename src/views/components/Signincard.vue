@@ -4,7 +4,7 @@
     <v-text-field
         :rules="[rules.required]"
         v-model="email"
-        class="mx-4 pt-5"
+        class="mx-4 pt-5 font-logotype"
         label="ユーザーID"
         required
     ></v-text-field>
@@ -12,14 +12,14 @@
         :rules="[rules.required]"
         :type="passwordarea ? 'text' : 'password'"
         v-model="password"
-        class="mx-4"
+        class="mx-4 font-logotype"
         label="パスワード"
         hint="八文字以上の文字列です."
         required
         @click:append="passwordarea = !passwordarea"
     ></v-text-field>
     <div class="text-right mr-4 red--text"> {{errors}} </div>
-    <div class="moji ma-4">会員登録をされていない方</div>
+    <div class="moji ma-4 font-harenosora">会員登録をされていない方</div>
     <v-layout justify-space-around="">
         <v-layout class="tosignup">
             <!-- <div class="moji ml-4">会員登録をされていない方</div> -->
@@ -96,5 +96,22 @@ export default {
     position: relative;
     top: 23px;
     font-size: 10pt;
+}
+
+@font-face {
+    font-family: 'LogoType';
+    src: url('../../fonts/07LogoTypeGothic7.ttf') format('TrueType');
+}
+
+@font-face {
+    font-family: 'Harenosora';
+    src: url('../../fonts/Harenosora.otf') format('OpenType');
+}
+
+.font-logotype{
+    font-family: 'LogoType';
+}
+.font-harenosora{
+    font-family: 'Harenosora';
 }
 </style>
