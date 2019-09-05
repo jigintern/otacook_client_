@@ -22,3 +22,22 @@ export default {
     }
 }
 </script>
+
+<style>
+    @font-face {
+        font-family: 'LogoType';
+        src: url('../../fonts/07LogoTypeGothic7.ttf') format('TrueType');
+    }
+
+    @font-face {
+        font-family: 'Harenosora';
+        src: url('../../fonts/Harenosora.otf') format('OpenType');
+    }
+
+    .font-logotype{
+        font-family: 'LogoType';
+    }
+    .font-harenosora{
+        font-family: 'Harenosora';
+    }
+</style>

@@ -3,19 +3,19 @@ div(color="#F7F3E8")
     v-container
         v-card(class="ma-4")
             //料理の名前を入れる##
-            div.display-2.pt-4.ml-4 ランキング
+            h1.pt-4.ml-4.font-logotype ランキング
             v-divider.my-2.mx-4
-            div.display-1.mx-4 お題: {{ recipetitle }}
+            h1.mx-4.font-logotype お題: {{ recipetitle }}
             v-row.mx-4
                 div.headline.ml-2.mb-1 {{ date }}
                 div.headline.ml-2.mb-1 {{ time }}
 
-            div.ma-4.ml-8.headline(v-for="line in ranking") {{ line.rank }}位
+            h1.ma-4.font-logotype(v-for="line in ranking") {{ line.rank }}位
                 Contestresultcard(
                     :title="line.title"
                     :name="line.name"
                     :img="line.img"
-                    :icon="line.icon"
+                    :icon="icon_img"
                     :comment="line.comment"
                     :isnameshow="true"
                 )
@@ -41,6 +41,7 @@ export default{
             error: "",
             date: "",
             time: "",
+            icon_img:"https://t1.intern.jigd.info/files/20190905-020131pi.png",
             recipetitle:'',
             jsonmember: [],
             ranking: "",
@@ -65,7 +66,7 @@ export default{
             this.isloggingin = false
             self.error = "ログインしてください"
         }else{
-            axios.get('http://localhost:8080/api/contest/info/'+String(self.contestid))
+            axios.get('https://t1.intern.jigd.info/flask/api/contest/info/'+String(self.contestid))
             .then(function (response) {
                 var data = response.data
                 self.recipetitle = data["title"]
@@ -74,7 +75,7 @@ export default{
             })
 
             this.isloggingin = true
-            axios.get('http://localhost:8080/api/contest/rankingmemberlistfromuser/'+String(this.userid))
+            axios.get('https://t1.intern.jigd.info/flask/api/contest/rankingmemberlistfromuser/'+String(this.userid))
             .then(function (response) {
                 console.log(response.data)
                 self.jsonmember = "[" + response.data + "]"
@@ -102,3 +103,22 @@ export default{
     }
     }
 </script>
+
+<style>
+    @font-face {
+        font-family: 'LogoType';
+        src: url('../../fonts/07LogoTypeGothic7.ttf') format('TrueType');
+    }
+
+    @font-face {
+        font-family: 'Harenosora';
+        src: url('../../fonts/Harenosora.otf') format('OpenType');
+    }
+
+    .font-logotype{
+        font-family: 'LogoType';
+    }
+    .font-harenosora{
+        font-family: 'Harenosora';
+    }
+</style>

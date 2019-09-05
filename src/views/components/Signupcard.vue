@@ -25,11 +25,6 @@
         required
         @click:append="passwordarea = !passwordarea"
     ></v-text-field>
-    <v-checkbox
-        class="mx-4"
-        label="利用規約に同意する。"
-        required
-    ></v-checkbox>
     <div class="text-right mr-4 red--text"> {{error}} </div>
     <div class="moji ma-4">会員の方は</div>
     <v-layout justify-space-around="">
@@ -58,7 +53,7 @@ export default {
                 //会員登録をサーバーで処理して
                 //sessionid, useridを取得する
                 let self = this
-                axios.post('http://localhost:8080/api/signup',{
+                axios.post('https://t1.intern.jigd.info/flask/api/signup',{
                     email: this.email,
                     password: this.password,
                     username: this.username

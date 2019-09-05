@@ -3,9 +3,9 @@ div(color="#F7F3E8")
   v-container
     v-card(class="ma-4")
       //料理の名前を入れる##
-      div.headline.ml-2.mb-1 {{ time }}
-      div.display-1.ml-4.font-weight-bold お題: {{ title }}
-      div.body-2.mr-4.text-right {{ total_member }}人が解答済みです
+      div.headline.ml-2.mb-1.font-logotype {{ time }}
+      h1.ml-4.font-weight-bold.font-logotype お題: {{ title }}
+      div.body-2.mr-4.text-right.font-logotype {{ total_member }}人が解答済みです
       .text-right.ma-4
         v-btn.title(
           color="#FFB618"
@@ -16,13 +16,13 @@ div(color="#F7F3E8")
       //コンテスト材料を表示するコンポーネント
       #materialsArea
         Materials(
-          class="ma-10 my-4 pb-4"
+          class="mx-6 my-4 pb-4"
           :list= "materiallist"
         )
       //コンテストレシピを表示するコンポーネント
       #RecipeArea
         Recipe(
-          class="ma-10 my-4 pb-10"
+          class="mx-6 my-4 pb-10"
           :list="recipelist"
         )
 
@@ -80,7 +80,7 @@ export default{
   mounted: function(){
     let self = this
     //実行中のコンテストの状態を取得
-    axios.get('http://localhost:8080/api/contest/now')
+    axios.get('https://t1.intern.jigd.info/flask/api/contest/now')
     .then(function (response) {
       var data = response.data
       console.log(data["status"])
@@ -94,7 +94,7 @@ export default{
     })
 
     //情報取得
-    axios.get('http://localhost:8080/api/contest/info/'+String(self.contestid))
+    axios.get('https://t1.intern.jigd.info/flask/api/contest/info/'+String(self.contestid))
     .then(function (response) {
         var data = response.data
         console.log(data["title"])
@@ -106,19 +106,19 @@ export default{
     })
 
     //材料リスト
-    axios.get('http://localhost:8080/api/contest/materialsinfo/'+String(self.contestid))
+    axios.get('https://t1.intern.jigd.info/flask/api/contest/materialsinfo/'+String(self.contestid))
     .then(function (response) {
         self.jsonmaterials = "[" + response.data + "]"
     })
 
-    axios.get('http://localhost:8080/api/contest/getentryusertotal')
+    axios.get('https://t1.intern.jigd.info/flask/api/contest/getentryusertotal')
     .then(function (response) {
         self.total_member = response.data
     })
 
 
     //レシピリスト
-    axios.get('http://localhost:8080/api/contest/recipesinfo/'+String(self.contestid))
+    axios.get('https://t1.intern.jigd.info/flask/api/contest/recipesinfo/'+String(self.contestid))
     .then(function (response) {
         self.jsonrecipes = "[" + response.data + "]"
     })
@@ -137,3 +137,22 @@ export default{
   }
 }
 </script>
+
+<style>
+    @font-face {
+        font-family: 'LogoType';
+        src: url('../../fonts/07LogoTypeGothic7.ttf') format('TrueType');
+    }
+
+    @font-face {
+        font-family: 'Harenosora';
+        src: url('../../fonts/Harenosora.otf') format('OpenType');
+    }
+
+    .font-logotype{
+        font-family: 'LogoType';
+    }
+    .font-harenosora{
+        font-family: 'Harenosora';
+    }
+</style>

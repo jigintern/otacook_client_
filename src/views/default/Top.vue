@@ -8,18 +8,21 @@
             ></v-img>
         </div>
     </v-card>
-    <h1 class="ma-4">
-        Otacookで好きなメシを作ろう！！
+    <h1 class="ma-4 font-logotype font-weight-bold">
+        日本中の人と料理の腕前を競い合おう！！
     </h1>
-    <div class= "mx-8 body-2">
-        Otacookは料理を作り、対戦しながら学べるサービスです。
+    <div class="font-harenosora">
+        <div class= "mx-8 body-2">
+            オタクックは料理を作り、対戦しながら学べるサービスです。
+        </div>
+        <div class= "mx-8 body-2">
+            コンテストでは、日本中の人が同じ料理を作り対戦することができます。また、ほかの人が同じテーマで何を作ったかを見ることができます。
+        </div>
+        <div class= "mx-8 body-2">
+            コンテストの結果からレートが出るので、日本中の人と対戦しながら料理の腕前を上げることができます。
+        </div>
     </div>
-    <div class= "mx-8 body-2">
-        コンテストでは、日本中の人が同じ料理を作り対戦することができます。また、ほかの人がどのように作ったかを見ることができます。
-    </div>
-    <div class= "mx-8 body-2">
-        コンテストの結果からレートが出るので、日本中の人と対戦しながら料理の腕前を上げることができます。
-    </div>
+    
         <ContestResult
             class="ma-4"
             v-if="isActiveContestResult === true"
@@ -50,13 +53,16 @@ export default {
         let self = this
         //実行中のコンテストのIDを取得
         //実行中から結果発表までがnow
-        axios.get('http://localhost:8080/api/contest/now')
+        axios.get('https://t1.intern.jigd.info/flask/api/contest/now')
         .then(function (response) {
             var data = response.data
             console.log(data["contestid"])
             console.log(data["status"])
             self.contestid = data["contestid"]
             self.status = data["status"]
+            if(self.status == "0"){
+                self.isActiveContestYokoku = true
+            }
             if(self.status == "1" || self.status == "2"){
                 self.isActiveContestNow = true
             }
@@ -82,3 +88,22 @@ export default {
     },
 }
 </script>
+
+<style>
+    @font-face {
+        font-family: 'LogoType';
+        src: url('../../fonts/07LogoTypeGothic7.ttf') format('TrueType');
+    }
+
+    @font-face {
+        font-family: 'Harenosora';
+        src: url('../../fonts/Harenosora.otf') format('OpenType');
+    }
+
+    .font-logotype{
+        font-family: 'LogoType';
+    }
+    .font-harenosora{
+        font-family: 'Harenosora';
+    }
+</style>

@@ -4,10 +4,10 @@ div(color="#F7F3E8")
     v-card(class="ma-4")
       //料理の名前を入れる##
       div.headline.ml-2.mb-1 {{ time }}
-      div.display-1.ml-4.font-weight-bold お題: {{ resipetitle }}
+      h1.ml-4.font-weight-bold.font-logotype お題: {{ resipetitle }}
 
-      div.headline.ma-8.mb-0 料理名
-      v-text-field.ma-8.mt-0(
+      h2.ma-8.mb-0.font-logotype 料理名
+      v-text-field.ma-8.mt-0.font-logotype(
         :counter="30"
         value=""
         v-model="name"
@@ -15,8 +15,8 @@ div(color="#F7F3E8")
         label="料理名を入力！"
         required)
 
-      div.headline.ma-8.mb-0 コメント
-      v-textarea.ma-8.mt-0(
+      h2.ma-8.mb-0.font-logotype コメント
+      v-textarea.ma-8.mt-0.font-logotype(
         :counter="140"
         value=""
         v-model="outline"
@@ -24,11 +24,11 @@ div(color="#F7F3E8")
         label="料理について自由に書いてください！")
         required
 
-      div.headline.ma-8.mb-0 写真
+      h2.ma-8.mb-0.font-logotype 写真
       //input(
         type="file"
       //)
-      v-file-input.ma-8.mt-0(
+      v-file-input.ma-8.mt-0.font-logotype(
         @change="changefile"
         type="file" id="file" ref="file"
         accept="image/*"
@@ -88,7 +88,7 @@ export default{
   mounted: function(){
     let self = this
     //情報取得
-    axios.get('http://localhost:8080/api/contest/info/'+String(self.contestid))
+    axios.get('https://t1.intern.jigd.info/flask/api/contest/info/'+String(self.contestid))
     .then(function (response) {
         var data = response.data
         console.log(data["title"])
@@ -141,7 +141,7 @@ export default{
     toquestion2: function(){
       this.error = ""
       let self = this
-      axios.post('http://localhost:8080/api/contest/send',{   
+      axios.post('https://t1.intern.jigd.info/flask/api/contest/send',{   
           userid:this.userid,
           contestid:this.contestid,
           title: this.name,
@@ -158,3 +158,22 @@ export default{
   }
 }
 </script>
+
+<style>
+    @font-face {
+        font-family: 'LogoType';
+        src: url('../../fonts/07LogoTypeGothic7.ttf') format('TrueType');
+    }
+
+    @font-face {
+        font-family: 'Harenosora';
+        src: url('../../fonts/Harenosora.otf') format('OpenType');
+    }
+
+    .font-logotype{
+        font-family: 'LogoType';
+    }
+    .font-harenosora{
+        font-family: 'Harenosora';
+    }
+</style>

@@ -25,7 +25,7 @@
             <!-- <div class="moji ml-4">会員登録をされていない方</div> -->
             <v-btn class="ma-4" @click="tosignup">サインアップページへ</v-btn>
         </v-layout>
-        <v-btn class="ma-4" @click="submit" color="#FFB618">ログイン</v-btn>
+        <v-btn class="ma-4" @click="submit" color="#FFB618">サインイン</v-btn>
     </v-layout>
 </form>
 </v-card>
@@ -33,6 +33,7 @@
 
 <script>
 import axios from 'axios'
+import Cookies from 'js-cookie'
 
 export default {
     data () {
@@ -60,7 +61,7 @@ export default {
                 //ここでメールアドレスとパスワードをサーバーに送って
                 //sessionidとuseridを取得する
                 //data="email="+this.email+"&pass"
-                axios.post('http://localhost:8080/api/login',{
+                axios.post('https://t1.intern.jigd.info/flask/api/login',{
                     email:this.email,
                     password:this.password
                 })
