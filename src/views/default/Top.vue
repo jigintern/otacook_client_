@@ -9,7 +9,7 @@
         </div>
     </v-card>
     <h1 class="ma-4 font-logotype font-weight-bold">
-        日本中の人と料理の腕前を競い合おう！！
+        日本中の人と料理の腕前を比べよう！！
     </h1>
     <div class="font-harenosora">
         <div class= "mx-8 body-2">
