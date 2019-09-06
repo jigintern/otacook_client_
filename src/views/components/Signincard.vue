@@ -12,7 +12,7 @@
         :rules="[rules.required]"
         :type="passwordarea ? 'text' : 'password'"
         v-model="password"
-        class="mx-4 font-logotype"
+        class="mx-4"
         label="パスワード"
         hint="八文字以上の文字列です."
         required
@@ -66,7 +66,7 @@ export default {
                     password:this.password
                 })
                 .then(function (response) {
-                    console.log(response.data);
+                    //console.log(response.data);
                     if(response.data == "/USER/"){
                         self.errors = "ユーザーIDを確認"
                     }else if(response.data == "/PASS/"){
@@ -74,8 +74,8 @@ export default {
                     }else{
                         //var data = JSON.parse(response.data)
                         var data = response.data
-                        //console.log(data["userid"])
-                        //console.log(data["sessionid"])
+                        ////console.log(data["userid"])
+                        ////console.log(data["sessionid"])
                         self.userid = Number(data["userid"])
                         self.sessionid = Number(data["sessionid"])
                         self.$emit('signin', self.sessionid, self.userid)

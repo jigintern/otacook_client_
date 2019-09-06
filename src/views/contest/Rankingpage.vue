@@ -10,8 +10,9 @@ div(color="#F7F3E8")
                 div.headline.ml-2.mb-1 {{ date }}
                 div.headline.ml-2.mb-1 {{ time }}
 
-            h1.ma-4.font-logotype(v-for="line in ranking") {{ line.rank }}位
+            div.ma-4.font-logotype(v-for="line in ranking")
                 Contestresultcard(
+                    :rank="line.rank"
                     :title="line.title"
                     :name="line.name"
                     :img="line.img"
@@ -77,7 +78,7 @@ export default{
             this.isloggingin = true
             axios.get('https://t1.intern.jigd.info/flask/api/contest/rankingmemberlistfromuser/'+String(this.userid))
             .then(function (response) {
-                console.log(response.data)
+                //console.log(response.data)
                 self.jsonmember = "[" + response.data + "]"
                 var array = JSON.parse(self.jsonmember)
                 self.ranking = array

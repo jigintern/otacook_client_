@@ -24,9 +24,9 @@ export default {
         axios.get('https://t1.intern.jigd.info/flask/api/contest/info/'+String(this.contestid))
         .then(function (response) {
             var data = response.data
-            console.log(data["title"])
-            console.log(data["time"])
-            console.log(data["votetime"])
+            //console.log(data["title"])
+            //console.log(data["time"])
+            //console.log(data["votetime"])
             self.title = "お題:"+data["title"]
             self.time = data["time"]
             self.votetime = data["votetime"]

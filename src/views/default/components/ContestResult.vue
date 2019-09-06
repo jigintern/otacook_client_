@@ -3,7 +3,7 @@
         //v-card-title.font-logotype 前回コンテスト結果
 
         .text-center.ma-4.pb-4
-          v-btn.title(color="#FFB618" @click="torankingpage") 前回のコンテスト結果を見る
+          v-btn.title(color="#FFB618" @click="torankingpage") コンテスト結果を見る
 </template>
 
 <script>

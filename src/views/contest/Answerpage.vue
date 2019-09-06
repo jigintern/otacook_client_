@@ -91,19 +91,19 @@ export default{
     axios.get('https://t1.intern.jigd.info/flask/api/contest/info/'+String(self.contestid))
     .then(function (response) {
         var data = response.data
-        console.log(data["title"])
-        console.log(data["time"])
-        console.log(data["votetime"])
+        //console.log(data["title"])
+        //console.log(data["time"])
+        //console.log(data["votetime"])
         self.resipetitle = data["title"]
         self.time = data["time"]
     })
   },
   methods: {
     changefile :function(e){
-      console.log(e, e.target)
+      //console.log(e, e.target)
       //this.file = this.$refs.file
       this.file = e
-      //console.log(this.file)
+      ////console.log(this.file)
     },
     toquestion: function(){
       let self = this
@@ -112,7 +112,7 @@ export default{
       }else{
         let formData = new FormData();
         formData.append('file', this.file);
-        console.log(this.file)
+        //console.log(this.file)
         axios.post( 'https://t1.intern.jigd.info/up.php',
         formData,
         {
@@ -121,8 +121,8 @@ export default{
           }
         }
         ).then(function(e){
-          console.log('SUCCESS!!');
-          console.log(e.data)
+          //console.log('SUCCESS!!');
+          //console.log(e.data)
           if(e.data == "-1"){
             self.error="写真を選択してください"
           }else if(e.data == "-2"){
@@ -133,7 +133,7 @@ export default{
           }
         })
         .catch(function(){
-          console.log('FAILURE!!');
+          //console.log('FAILURE!!');
           self.error="写真のアップロードに失敗しました"
         });
       }

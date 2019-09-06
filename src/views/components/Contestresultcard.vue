@@ -1,10 +1,10 @@
 <template lang="pug">
     div
-        v-card(elevation="0")
+        v-card
             div(v-if="isnameshow === false")
                 v-card-title.font-logotype.font-weight-bold {{ number }}. {{title}}
             div(v-else)
-                v-card-title.font-logotype.font-weight-bold {{title}}
+                v-card-title.font-logotype.font-weight-bold {{rank}}位. {{title}}
             div(v-if="isnameshow")
                 v-btn(text width="96%").mx-4.pb-4
                     v-layout
@@ -23,6 +23,7 @@
 <script>
 export default {
     props: {
+        rank: String,
         title: String,
         name: String,
         img: String,

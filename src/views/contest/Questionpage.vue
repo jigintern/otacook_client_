@@ -83,7 +83,7 @@ export default{
     axios.get('https://t1.intern.jigd.info/flask/api/contest/now')
     .then(function (response) {
       var data = response.data
-      console.log(data["status"])
+      //console.log(data["status"])
       self.status = data["status"]
       if(self.status == "1"){
           self.isansweractive = true
@@ -97,9 +97,9 @@ export default{
     axios.get('https://t1.intern.jigd.info/flask/api/contest/info/'+String(self.contestid))
     .then(function (response) {
         var data = response.data
-        console.log(data["title"])
-        console.log(data["time"])
-        console.log(data["votetime"])
+        //console.log(data["title"])
+        //console.log(data["time"])
+        //console.log(data["votetime"])
         self.title = data["title"]
         self.time = data["time"]
         self.votetime = data["votetime"]

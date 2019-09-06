@@ -98,7 +98,7 @@ export default{
         let self = this
         axios.get('https://t1.intern.jigd.info/flask/api/contest/getrandomgroopid')
         .then(function (response) {
-            console.log(response.data)
+            //console.log(response.data)
             self.groopid = Number(response.data)
             self.getlist()
         })
@@ -106,9 +106,9 @@ export default{
         axios.get('https://t1.intern.jigd.info/flask/api/contest/info/'+String(self.contestid))
         .then(function (response) {
             var data = response.data
-            //console.log(data["title"])
-            //console.log(data["time"])
-            //console.log(data["votetime"])
+            ////console.log(data["title"])
+            ////console.log(data["time"])
+            ////console.log(data["votetime"])
             self.recipetitle = data["title"]
             //self.time = data["time"]
             self.time = data["votetime"]
@@ -167,7 +167,7 @@ export default{
             let self = this
             axios.get('https://t1.intern.jigd.info/flask/api/contest/memberlistfromgroop/'+String(this.groopid))
             .then(function (response) {
-                console.log(response.data)
+                //console.log(response.data)
                 self.jsonmember = "[" + response.data + "]"
                 var array = JSON.parse(self.jsonmember)
                 self.member = array
@@ -186,7 +186,7 @@ export default{
                     no3: this.no3
                 })
                 .then(function (response) {
-                    console.log(response.data);
+                    //console.log(response.data);
                     if(response.data == "0"){
                         self.$router.push("/questionpage")
                     }

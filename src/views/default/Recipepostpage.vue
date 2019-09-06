@@ -122,17 +122,17 @@ export default{
     computed: {
         jsonmaterials: function(){
             var jsontext = JSON.stringify(this.materials)
-            console.log(jsontext)
+            //console.log(jsontext)
             return jsontext
         },
         jsonrecipes: function(){
             var jsontext = JSON.stringify(this.recipes)
-            console.log(jsontext)
+            //console.log(jsontext)
             return jsontext
         },
         jsontags: function(){
             var jsontext = JSON.stringify(this.tags)
-            console.log(jsontext)
+            //console.log(jsontext)
             return jsontext
         },
         materiallist: function(){

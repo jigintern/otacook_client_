@@ -53,11 +53,16 @@ export default {
         let self = this
         //実行中のコンテストのIDを取得
         //実行中から結果発表までがnow
+        console.log("いたずらしようとしているなら今すぐやめましょう")
+        console.log("いやだよって人は住所を教えてください")
+        console.log("物理的に永久バンします")
+        console.log("- - - - - - - - - - - - - - - - - - - -")
+        console.log("ガバガバAPIだから叩かないでね泣")
         axios.get('https://t1.intern.jigd.info/flask/api/contest/now')
         .then(function (response) {
             var data = response.data
-            console.log(data["contestid"])
-            console.log(data["status"])
+            //console.log(data["contestid"])
+            //console.log(data["status"])
             self.contestid = data["contestid"]
             self.status = data["status"]
             if(self.status == "0"){

@@ -26,8 +26,8 @@ export default {
         axios.get('https://t1.intern.jigd.info/flask/api/userinfo/'+String(this.userid))
         .then(function (response) {
             var data = response.data
-            console.log(data["username"])
-            console.log(data["email"])
+            //console.log(data["username"])
+            //console.log(data["email"])
             self.username = data["username"]
             self.email = data["email"]
         })

@@ -16,7 +16,7 @@
         required
     ></v-text-field>
     <v-text-field
-        class="mx-4 font-logotype"
+        class="mx-4"
         v-model="password"
         :rules="[rules.required, rules.min]"
         :type="passwordarea ? 'text' : 'password'"
@@ -59,14 +59,14 @@ export default {
                     username: this.username
                 })
                 .then(function (response) {
-                    console.log(response.data);
+                    //console.log(response.data);
                     if(response.data == "-1"){
                         self.error = "使用されているユーザーIDです"
                     }else{
                         //var data = JSON.parse(response.data)
                         var data = response.data
-                        //console.log(data["userid"])
-                        //console.log(data["sessionid"])
+                        ////console.log(data["userid"])
+                        ////console.log(data["sessionid"])
                         self.userid = Number(data["userid"])
                         self.sessionid = Number(data["sessionid"])
                         self.$emit('signin', self.sessionid, self.userid)
