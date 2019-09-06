@@ -13,10 +13,6 @@ filepath = "datas/data.json"
 
 app = Flask(__name__)
 CORS(app)
-#app.logger.disabled = True
-
-#werkzeug_logger = logging.getLogger('werkzeug')
-#werkzeug_logger.disabled = True
 
 def allowed_file(filename):
     return '.' in filename and filename.rsplit('.', 1)[1] in ALLOWED_EXTENSIONS
@@ -46,7 +42,7 @@ def logout():
     print(data)
     jsondata = json.loads(data)
     sessionid = jsondata["sessionid"]
-    returndata = database.deletesession(sessionid)
+    returndata = database.delete_session(sessionid)
     return returndata
 
 @app.route('/api/signup', methods=["POST"])
@@ -57,42 +53,42 @@ def signup():
     email = jsondata["email"]
     password = jsondata["password"]
     username = jsondata["username"]
-    returndata = database.createuser(username, email, password)
+    returndata = database.create_user(username, email, password)
     return returndata
 
 @app.route('/api/checksession', methods=["POST"])
-def checksession():
+def check_session():
     data=request.get_data()
     print(data)
     jsondata = json.loads(data)
     sessionid = jsondata["sessionid"]
-    returndata = database.checksession(sessionid)
+    returndata = database.check_session(sessionid)
     return returndata
 
 @app.route('/api/userinfo/<userid>', methods=["GET"])
 def userinfo(userid):
-    returndata = database.getuserinfo(str(userid))
+    returndata = database.get_userinfo(str(userid))
     return returndata
 
 #コンテスト関連
 @app.route('/api/contest/now', methods=["GET"])
 def contestnowinfo():
-    returndata = database.nowcontestinfo()
+    returndata = database.now_contest_info()
     return returndata
 
 @app.route('/api/contest/info/<contestid>', methods=["GET"])
-def contestinfo(contestid):
-    returndata = database.contestinfo(contestid)
+def contest_info(contestid):
+    returndata = database.contest_info(contestid)
     return returndata
 
 @app.route('/api/contest/materialsinfo/<contestid>', methods=["GET"])
-def contestmaterialsinfo(contestid):
-    returndata = database.contestmaterialsinfo(contestid)
+def contest_materials_info(contestid):
+    returndata = database.contest_materials_info(contestid)
     return returndata
 
 @app.route('/api/contest/recipesinfo/<contestid>', methods=["GET"])
-def contestrecipesinfo(contestid):
-    returndata = database.contestrecipesinfo(contestid)
+def contest_recipes_info(contestid):
+    returndata = database.contest_recipes_info(contestid)
     return returndata
 
 #コンテストに投稿
@@ -106,7 +102,7 @@ def send():
     title = jsondata["title"]
     comment = jsondata["comment"]
     url = jsondata["url"]
-    returndata = database.savecontestanswer(contestid, userid, title, comment, url)
+    returndata = database.save_contest_answer(contestid, userid, title, comment, url)
     return returndata
 
 #投票
@@ -123,42 +119,42 @@ def vote():
     return returndata
 
 @app.route('/api/contest/memberlistfromuser/<userid>', methods=["GET"])
-def getmemberlistfromuser(userid):
-    returndata = database.getmemberlistfromuser(userid)
+def get_memberlist_from_user(userid):
+    returndata = database.get_memberlist_from_user(userid)
     return returndata
 
 @app.route('/api/contest/memberlistfromgroop/<groopid>', methods=["GET"])
 def getmemberlistfrmgroop(groopid):
-    returndata = database.getmemberlistfromgroop(groopid)
+    returndata = database.get_memberlist_from_groopid(groopid)
     return returndata
 
 @app.route('/api/contest/rankingmemberlistfromuser/<userid>', methods=["GET"])
-def getrankingmemberlistfromuser(userid):
-    returndata = database.getrankingmemberlistfromuser(userid)
+def get_ranking_memberlist_from_user(userid):
+    returndata = database.get_ranking_memberlist_from_user(userid)
     return returndata
 
 @app.route('/api/contest/getrandomgroopid', methods=['GET'])
-def getrandomgroopid():
-    returndata = database.getrandomgroopid()
+def get_random_groopid():
+    returndata = database.get_random_groopid()
     return returndata
 
 @app.route('/api/contest/getentryusertotal', methods=['GET'])
-def getentryusertotal():
-    returndata = database.getentryusertotal()
+def get_entry_user_total():
+    returndata = database.get_entry_user_total()
     return returndata
 
 
 @app.route('/api/admin/contest/vote', methods=['GET'])
-def adstartvote():
-    database.startvote()
+def adstart_vote():
+    database.start_vote()
     return "投票モード"
 
 @app.route('/api/admin/contest/result', methods=['GET'])
-def adstartresult():
-    database.startresult()
+def adstart_result():
+    database.start_result()
     return "結果モード"
 
 def start():
-    app.run(port=8080)
+    app.run(host='0.0.0.0', port=3031, ssl_context=('server.crt', 'server.key'))
 
 start()
