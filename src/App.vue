@@ -62,19 +62,19 @@ export default {
     }else{
       //ここでセッションIDをサーバーに送ってログイン状態を確認
       //true なら以下のプロパティをセット
-      console.log(sessionid)
+      //console.log(sessionid)
       axios.post('https://t1.intern.jigd.info/flask/api/checksession',{
           sessionid:sessionid,
       })
       .then(function (response) {
-          console.log(response.data);
+          //console.log(response.data);
           if(response.data == "-1"){
             self.Appsessionid = -1
             self.AppisLoggingin = 
             Cookies.set('sessionid', -1);
           }else{
             var data = response.data
-            //console.log(response.data)
+            ////console.log(response.data)
             self.Appuserid = Number(response.data)
             self.AppisLoggingin = true
           }
@@ -98,7 +98,7 @@ export default {
           sessionid:this.Appsessionid
       })
       .then(function (response) {
-          console.log(response.data);
+          //console.log(response.data);
           if(response.data == "0"){
             self.AppisLoggingin = false
             Cookies.set('sessionid', -1);

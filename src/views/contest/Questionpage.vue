@@ -3,9 +3,9 @@ div(color="#F7F3E8")
   v-container
     v-card(class="ma-4")
       //料理の名前を入れる##
-      div.headline.ml-2.mb-1 {{ time }}
-      div.display-1.ml-4.font-weight-bold お題: {{ title }}
-      div.body-2.mr-4.text-right {{ total_member }}人が解答済みです
+      div.headline.ml-2.mb-1.font-logotype {{ time }}
+      h1.ml-4.font-weight-bold.font-logotype お題: {{ title }}
+      div.body-2.mr-4.text-right.font-logotype {{ total_member }}人が解答済みです
       .text-right.ma-4
         v-btn.title(
           color="#FFB618"
@@ -16,13 +16,13 @@ div(color="#F7F3E8")
       //コンテスト材料を表示するコンポーネント
       #materialsArea
         Materials(
-          class="ma-10 my-4 pb-4"
+          class="mx-6 my-4 pb-4"
           :list= "materiallist"
         )
       //コンテストレシピを表示するコンポーネント
       #RecipeArea
         Recipe(
-          class="ma-10 my-4 pb-10"
+          class="mx-6 my-4 pb-10"
           :list="recipelist"
         )
 
@@ -83,7 +83,7 @@ export default{
     axios.get('https://t1.intern.jigd.info/flask/api/contest/now')
     .then(function (response) {
       var data = response.data
-      console.log(data["status"])
+      //console.log(data["status"])
       self.status = data["status"]
       if(self.status == "1"){
           self.isansweractive = true
@@ -97,9 +97,9 @@ export default{
     axios.get('https://t1.intern.jigd.info/flask/api/contest/info/'+String(self.contestid))
     .then(function (response) {
         var data = response.data
-        console.log(data["title"])
-        console.log(data["time"])
-        console.log(data["votetime"])
+        //console.log(data["title"])
+        //console.log(data["time"])
+        //console.log(data["votetime"])
         self.title = data["title"]
         self.time = data["time"]
         self.votetime = data["votetime"]
@@ -137,3 +137,22 @@ export default{
   }
 }
 </script>
+
+<style>
+    @font-face {
+        font-family: 'LogoType';
+        src: url('../../fonts/07LogoTypeGothic7.ttf') format('TrueType');
+    }
+
+    @font-face {
+        font-family: 'Harenosora';
+        src: url('../../fonts/Harenosora.otf') format('OpenType');
+    }
+
+    .font-logotype{
+        font-family: 'LogoType';
+    }
+    .font-harenosora{
+        font-family: 'Harenosora';
+    }
+</style>

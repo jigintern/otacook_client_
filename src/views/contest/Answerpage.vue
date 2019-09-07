@@ -4,10 +4,10 @@ div(color="#F7F3E8")
     v-card(class="ma-4")
       //料理の名前を入れる##
       div.headline.ml-2.mb-1 {{ time }}
-      div.display-1.ml-4.font-weight-bold お題: {{ resipetitle }}
+      h1.ml-4.font-weight-bold.font-logotype お題: {{ resipetitle }}
 
-      div.headline.ma-8.mb-0 料理名
-      v-text-field.ma-8.mt-0(
+      h2.ma-8.mb-0.font-logotype 料理名
+      v-text-field.ma-8.mt-0.font-logotype(
         :counter="30"
         value=""
         v-model="name"
@@ -15,8 +15,8 @@ div(color="#F7F3E8")
         label="料理名を入力！"
         required)
 
-      div.headline.ma-8.mb-0 コメント
-      v-textarea.ma-8.mt-0(
+      h2.ma-8.mb-0.font-logotype コメント
+      v-textarea.ma-8.mt-0.font-logotype(
         :counter="140"
         value=""
         v-model="outline"
@@ -24,11 +24,11 @@ div(color="#F7F3E8")
         label="料理について自由に書いてください！")
         required
 
-      div.headline.ma-8.mb-0 写真
+      h2.ma-8.mb-0.font-logotype 写真
       //input(
         type="file"
       //)
-      v-file-input.ma-8.mt-0(
+      v-file-input.ma-8.mt-0.font-logotype(
         @change="changefile"
         type="file" id="file" ref="file"
         accept="image/*"
@@ -91,19 +91,19 @@ export default{
     axios.get('https://t1.intern.jigd.info/flask/api/contest/info/'+String(self.contestid))
     .then(function (response) {
         var data = response.data
-        console.log(data["title"])
-        console.log(data["time"])
-        console.log(data["votetime"])
+        //console.log(data["title"])
+        //console.log(data["time"])
+        //console.log(data["votetime"])
         self.resipetitle = data["title"]
         self.time = data["time"]
     })
   },
   methods: {
     changefile :function(e){
-      console.log(e, e.target)
+      //console.log(e, e.target)
       //this.file = this.$refs.file
       this.file = e
-      //console.log(this.file)
+      ////console.log(this.file)
     },
     toquestion: function(){
       let self = this
@@ -112,7 +112,7 @@ export default{
       }else{
         let formData = new FormData();
         formData.append('file', this.file);
-        console.log(this.file)
+        //console.log(this.file)
         axios.post( 'https://t1.intern.jigd.info/up.php',
         formData,
         {
@@ -121,8 +121,8 @@ export default{
           }
         }
         ).then(function(e){
-          console.log('SUCCESS!!');
-          console.log(e.data)
+          //console.log('SUCCESS!!');
+          //console.log(e.data)
           if(e.data == "-1"){
             self.error="写真を選択してください"
           }else if(e.data == "-2"){
@@ -133,7 +133,7 @@ export default{
           }
         })
         .catch(function(){
-          console.log('FAILURE!!');
+          //console.log('FAILURE!!');
           self.error="写真のアップロードに失敗しました"
         });
       }
@@ -158,3 +158,22 @@ export default{
   }
 }
 </script>
+
+<style>
+    @font-face {
+        font-family: 'LogoType';
+        src: url('../../fonts/07LogoTypeGothic7.ttf') format('TrueType');
+    }
+
+    @font-face {
+        font-family: 'Harenosora';
+        src: url('../../fonts/Harenosora.otf') format('OpenType');
+    }
+
+    .font-logotype{
+        font-family: 'LogoType';
+    }
+    .font-harenosora{
+        font-family: 'Harenosora';
+    }
+</style>

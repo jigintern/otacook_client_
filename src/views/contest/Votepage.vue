@@ -6,10 +6,10 @@ div(color="#F7F3E8")
             v-row.mx-4
                 //div.headline.ml-0.pt-1 {{ date }}
                 div.headline.pt-2 {{ time }}
-            div.display-1.ma-4 お題: {{ recipetitle }}
+            h1.ma-4.font-logotype お題: {{ recipetitle }}
             v-divider.my-2.mx-4
 
-            .text-center.ma-4.body-1 下の5つの料理から「おいしそうだな～」「食べたいな～」と思う順に、1位 ~ 3位まで選んでください！
+            .text-center.ma-4.body-1.font-harenosora 下の5つの料理から「おいしそうだな～」「食べたいな～」と思う順に、1位〜3位まで選んでください！
 
             div.ma-8(v-for="line in member")
                 Contestresultcard(
@@ -98,7 +98,7 @@ export default{
         let self = this
         axios.get('https://t1.intern.jigd.info/flask/api/contest/getrandomgroopid')
         .then(function (response) {
-            console.log(response.data)
+            //console.log(response.data)
             self.groopid = Number(response.data)
             self.getlist()
         })
@@ -106,9 +106,9 @@ export default{
         axios.get('https://t1.intern.jigd.info/flask/api/contest/info/'+String(self.contestid))
         .then(function (response) {
             var data = response.data
-            //console.log(data["title"])
-            //console.log(data["time"])
-            //console.log(data["votetime"])
+            ////console.log(data["title"])
+            ////console.log(data["time"])
+            ////console.log(data["votetime"])
             self.recipetitle = data["title"]
             //self.time = data["time"]
             self.time = data["votetime"]
@@ -167,7 +167,7 @@ export default{
             let self = this
             axios.get('https://t1.intern.jigd.info/flask/api/contest/memberlistfromgroop/'+String(this.groopid))
             .then(function (response) {
-                console.log(response.data)
+                //console.log(response.data)
                 self.jsonmember = "[" + response.data + "]"
                 var array = JSON.parse(self.jsonmember)
                 self.member = array
@@ -186,7 +186,7 @@ export default{
                     no3: this.no3
                 })
                 .then(function (response) {
-                    console.log(response.data);
+                    //console.log(response.data);
                     if(response.data == "0"){
                         self.$router.push("/questionpage")
                     }
@@ -196,3 +196,22 @@ export default{
     }
     }
 </script>
+
+<style>
+    @font-face {
+        font-family: 'LogoType';
+        src: url('../../fonts/07LogoTypeGothic7.ttf') format('TrueType');
+    }
+
+    @font-face {
+        font-family: 'Harenosora';
+        src: url('../../fonts/Harenosora.otf') format('OpenType');
+    }
+
+    .font-logotype{
+        font-family: 'LogoType';
+    }
+    .font-harenosora{
+        font-family: 'Harenosora';
+    }
+</style>

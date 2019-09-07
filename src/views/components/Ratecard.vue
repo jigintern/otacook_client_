@@ -1,10 +1,10 @@
 <template lang="pug">
 div
     v-card
-        v-card-title レート
+        v-card-title.font-logotype レート
         v-layout
             div.ml-8 Your rate is
-            div.mx-1.mb-4 {{rate}}.
+            div.mx-1.mb-4.font-weight-bold {{rate}}.
 </template>
 
 <script>
@@ -28,3 +28,22 @@ export default {
     }
 }
 </script>
+
+<style>
+    @font-face {
+        font-family: 'LogoType';
+        src: url('../../fonts/07LogoTypeGothic7.ttf') format('TrueType');
+    }
+
+    @font-face {
+        font-family: 'Harenosora';
+        src: url('../../fonts/Harenosora.otf') format('OpenType');
+    }
+
+    .font-logotype{
+        font-family: 'LogoType';
+    }
+    .font-harenosora{
+        font-family: 'Harenosora';
+    }
+</style>
